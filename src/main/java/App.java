@@ -213,6 +213,30 @@ public class App {
         }
     }
 
+    private static Student searchStudent(String studentName) throws InputMismatchException{
+        Optional<Student> studentObj = students.stream()
+                .filter(o -> o.getStudentName().equals(studentName))
+                .findFirst();
+        // 해당하는 데이터가 없을 경우 예외처리
+        if(studentObj.isPresent()) {
+            return studentObj.get();
+        } else {
+            throw new InputMismatchException("일치하는 학생이 없습니다.\n선택 화면 이동...");
+        }
+    }
+
+    private static Subject searchSubject(int subjectId) throws InputMismatchException{
+        Optional<Subject> subjectObj = subjects.stream()
+                .filter(o -> o.getSubjectId() == subjectId)
+                .findFirst();
+        // 해당하는 데이터가 없을 경우 예외처리
+        if(subjectObj.isPresent()) {
+            return subjectObj.get();
+        } else {
+            throw new InputMismatchException("일치하는 과목이 없습니다.\n선택 화면 이동...");
+        }
+    }
+
     private static Subject searchSubject(String subjectName) throws InputMismatchException{
         Optional<Subject> subjectObj = subjects.stream()
                 .filter(o -> o.getSubjectName().equals(subjectName))
