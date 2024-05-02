@@ -10,4 +10,16 @@ public class Student {
         this.studentName = studentName;
         this.studentSubjects = studentSubjects;
     }
+
+    public int getStudentId() {
+        return studentId;
+    }
+
+    public String getStudentName() {
+        return studentName;
+    }
+
+    public List<Subject> getStudentSubjects() {
+        return studentSubjects;
+    }
 }
