@@ -133,7 +133,7 @@ public class App {
 
             try {
                 switch (input) {
-                    case 1 -> System.out.println("아직 개발 중인 기능입니다..."); // 수강생 등록
+                    case 1 -> Student.studentNew(sc,students); // 수강생 등록
                     case 2 -> System.out.println("아직 개발 중인 기능입니다..."); // 수강생 목록 조회
                     case 3 -> System.out.println("아직 개발 중인 기능입니다..."); // 수강생 정보 조회
                     case 4 -> System.out.println("아직 개발 중인 기능입니다..."); // 수강생 정보 수정

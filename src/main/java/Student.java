@@ -5,10 +5,10 @@ import java.util.Scanner;
 public class Student {
     private int  studentId ;
     private String  studentName ;
-    private List<String> studentSubjects;
+    private List<Subject> studentSubjects;
 
 
-    public Student(int studentId, String studentName, List<String> studentSubjects) {
+    public Student(int studentId, String studentName, List<Subject> studentSubjects) {
         this.studentId = studentId;
         this.studentName = studentName;
         this.studentSubjects = studentSubjects;
@@ -19,28 +19,20 @@ public class Student {
         return studentId;
     }
 
-    public List<String> getStudentSubjects() {
-        return studentSubjects;
-    }
-
     public String getStudentName() {
         return studentName;
     }
 
-
-
-    public void main(String[] args) {
-        List<Student> students = new ArrayList<>();
-        Scanner scanner = new Scanner(System.in);
-        studentNew(scanner, students);
-
-
+    public List<Subject> getStudentSubjects() {
+        return studentSubjects;
     }
 
-    public void studentNew(Scanner scanner, List<Student> students) {
+
+
+    public static void studentNew(Scanner scanner, List<Student> students) {
         while (true){
-            System.out.print("학생ID을 입력해주세요 id: ");
-            int studentId = scanner.nextInt();
+            System.out.print("학생 ID를 입력해주세요 id: ");
+            int studentId = Parser.parseId(scanner.next());
 
             // 아이디가 존제하는지 검사
             List<Student> st = students.stream()
@@ -65,7 +57,7 @@ public class Student {
             // 과목 등록
 
 
-            List<String> studentSubjects_list = new ArrayList<>();
+            List<Subject> studentSubjects_list = new ArrayList<>();
             int count = 0;
             int count_sub = 0;
             System.out.print("등록할 과목을 입력해 주세요 ( 영문은 소문자로 )\n 최소 3개 이상의 필수 과목, 2개 이상의 선택 과목을");
@@ -83,7 +75,7 @@ public class Student {
                     count++;
                     System.out.println(count + "번째 과목 선택됨 = " + SubjectName);
                     System.out.println();
-                    studentSubjects_list.add(SubjectName);
+                    // 여기에 추가
 
                     System.out.print("과목을 입력해주세요 : ");
 
@@ -98,7 +90,7 @@ public class Student {
                         count_sub++;
                         System.out.println();
                         System.out.println(count_sub+ " 번째 선택 과목 선택됨 " + SubjectName);
-                        studentSubjects_list.add(SubjectName);
+                        // 여기에 추가
                         if (count_sub >= 2) {
                             System.out.print("2개 이상입니다. 완료 하려면 (end) or (끝)을 입력해 주세요 : ");
                             System.out.println();
@@ -122,4 +114,5 @@ public class Student {
             }
         }
     }
+
 }
