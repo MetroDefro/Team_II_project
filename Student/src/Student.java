@@ -85,14 +85,22 @@ public class Student {
             System.out.println();
 
             // 과목 등록
-            System.out.print("등록할 과목을 입력해 주세요 ( 영문은 소문자로 )\n 최소 3개 이상의 필수 과목, 2개 이상의 선택 과목을 \n 입력해주세요 : ");
+
 
             List<String> studentSubjects_list = new ArrayList<>();
             int count = 0;
             int count_sub = 0;
+            System.out.print("등록할 과목을 입력해 주세요 ( 영문은 소문자로 )\n 최소 3개 이상의 필수 과목, 2개 이상의 선택 과목을");
             while (true) {
+
+                if(count < 90){
+                    System.out.print("필수 과목 : java , 객체지향 , spring , jpa , mysql  \n 입력해주세요 : ");
+
+                }else if(count >= 90){
+                    System.out.print("선택 과목 : 디자인_패턴 , spring_security , redis , mongodb \n 입력해주세요 :  ");
+                }
                 String SubjectName = scanner.next();
-                if (count < 90 && SubjectName.equals("java") || SubjectName.equals("객체지향") || SubjectName.equals("spring") || SubjectName.equals("jpa") || SubjectName.equals("mysql")) {
+                if (count <= 99 && SubjectName.equals("java") || SubjectName.equals("객체지향") || SubjectName.equals("spring") || SubjectName.equals("jpa") || SubjectName.equals("mysql")) {
                     count++;
                     System.out.println(count + "번째 과목 선택됨 = " + SubjectName);
                     System.out.println();
@@ -101,24 +109,28 @@ public class Student {
                     System.out.print("과목을 입력해주세요 : ");
 
                     if (count >= 3 && count<= 100){
-                        System.out.print("3개 이상입니다. \n 선택과목을 선택하려면 (선택) 을 입력해 주세요 : ");
+                        System.out.println("3개 이상입니다. \n 선택과목을 선택하려면 (선택) 을 입력해 주세요");
                     }
-                } else if (count > 90 || SubjectName.equals("선택")) {
+
+                } else if (count >= 100 || SubjectName.equals("선택")) {
                     count+=100;
-                    System.out.print("선택 과목을 \n입력해주세요 : ");
-                    if (SubjectName.equals("디자인 패턴") || SubjectName.equals("spring security") || SubjectName.equals("redis") || SubjectName.equals("mongodb")){
-                        studentSubjects_list.add(SubjectName);
+                    System.out.println("선택 과목을 입력해주세요 : ");
+                    if (SubjectName.equals("디자인_패턴") || SubjectName.equals("spring_security") || SubjectName.equals("redis") || SubjectName.equals("mongodb")){
                         count_sub++;
                         System.out.println(count_sub+ " 번째 선택 과목 선택됨 " + SubjectName);
+                        studentSubjects_list.add(SubjectName);
+                        System.out.println();
                         if (count_sub >= 2) {
                             System.out.print("2개 이상입니다. 완료 하려면 (end) or (끝)을 입력해 주세요 : ");
+                            System.out.println();
                         }
+                    }else if (count >= 100){
+                        System.out.println("제대로 입력해 주세요");
                     }
-                }  else if (SubjectName.equals("end") || SubjectName.equals("끝")) {
+                } if (SubjectName.equals("end") || SubjectName.equals("끝")) {
                     break;
-                } else {
+                } else{
                     System.out.println("제대로 된 과목을 입력해 주세요");
-                    continue;
                 }
 
             }
