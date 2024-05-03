@@ -166,7 +166,7 @@ public class App {
             int input = sc.nextInt();
 
             switch (input) {
-                case 1 -> System.out.println("아직 개발 중인 기능입니다..."); // 수강생의 과목별 시험 회차 및 점수 등록
+                case 1 -> createScore(); // 수강생의 과목별 시험 회차 및 점수 등록
                 case 2 -> updateTurnScoreBySubject(); // 수강생의 과목별 회차 점수 수정
                 case 3 -> System.out.println("아직 개발 중인 기능입니다..."); // 수강생의 특정 과목 회차별 등급 조회
                 case 4 -> System.out.println("아직 개발 중인 기능입니다..."); // 수강생의 과목별 평균 등급 조회
@@ -178,6 +178,27 @@ public class App {
                 }
             }
         }
+    }
+
+    // 수강생의 과목별 시험 회차 및 점수 등록
+    private static void createScore() {
+        int studentId = getStudentId();
+        int subjectId = getSubjectId();
+        // SubjectType이 구현되면 사용
+        // String subjectType = getSubjectType();
+
+        Score score = new Score();
+
+        System.out.println("시험 점수 등록 ... ");
+        // 회차 1 ~ 10
+        for(int scoreTurn = 1; scoreTurn <= 10; scoreTurn++) {
+            score.addScore(scores, studentId,subjectId,scoreTurn,getScore());
+        }
+    }
+
+    private static int getSubjectId() {
+        System.out.print("\n관리할 과목의 번호를 입력하시오...");
+        return Parser.parseId(sc.next());
     }
 
     private static int getStudentId() {
