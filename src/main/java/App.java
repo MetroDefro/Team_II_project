@@ -273,6 +273,5 @@ public class App {
         System.out.println(subjectInput.getSubjectName() + "과목의 " + turnInput + "회차 등급을 조회합니다...");
         char grade = score.getScoreGrade();
         System.out.println("등급: " + grade);
-
     }
 }
