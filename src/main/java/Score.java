@@ -22,12 +22,13 @@ public class Score {
 
     }
 
-    public Score(List<Score> scores, int studentId, int subjectId, int scoreTurn, int score) {
+    public Score(List<Score> scores, int studentId, int subjectId, int scoreTurn, int score, char scoreGrade, SubjectType subjectType) {
         this.scores = scores;
         this.studentId = studentId;
         this.subjectId = subjectId;
         this.scoreTurn = scoreTurn;
         this.score = score;
+        this.scoreGrade = scoreGrade;
     }
 
     public int getScoreId() {
@@ -54,7 +55,7 @@ public class Score {
         return scoreGrade;
     }
 
-    public void addScore(List<Score> scores, int studentId, int subjectId, int scoreTurn, int score) {
+    public void addScore(List<Score> scores, int studentId, int subjectId, int scoreTurn, int score, SubjectType subjectType) {
         this.scores = scores;
         this.studentId = studentId;
         this.subjectId = subjectId;
@@ -69,11 +70,27 @@ public class Score {
                 return;
             }
         }
-        // scoreGrade 수정 필요
-        Score newScore = new Score(scores, studentId, subjectId, scoreTurn, score);
+
+        char scoreGrade = generateScore(score);
+
+        Score newScore = new Score(scores, studentId, subjectId, scoreTurn, score, scoreGrade, subjectType);
         scores.add(newScore);
-        System.out.println(scores);
     }
+
+    private char generateScore(int score) {
+        if (score >= 95) {
+            return 'A';
+        } else if (score >= 90) {
+            return 'B';
+        } else if (score >= 80) {
+            return 'C';
+        } else if (score >= 70) {
+            return 'D';
+        } else {
+            return 'F';
+        }
+    }
+
 
     public void patchScore(int score, SubjectType subjectType) {
         this.score = score;
