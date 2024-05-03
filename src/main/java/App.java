@@ -134,7 +134,7 @@ public class App {
             try {
                 switch (input) {
                     case 1 -> Student.studentNew(sc,students); // 수강생 등록
-                    case 2 -> System.out.println("아직 개발 중인 기능입니다..."); // 수강생 목록 조회
+                    case 2 -> searchAllStudent(); // 수강생 목록 조회
                     case 3 -> System.out.println("아직 개발 중인 기능입니다..."); // 수강생 정보 조회
                     case 4 -> System.out.println("아직 개발 중인 기능입니다..."); // 수강생 정보 수정
                     case 5 -> System.out.println("아직 개발 중인 기능입니다..."); // 수강생 삭제
@@ -282,6 +282,20 @@ public class App {
             throw new InputMismatchException("일치하는 데이터가 없습니다.\n선택 화면 이동...");
         }
     }
+
+    // 수강생 목록 조회
+    public static void searchAllStudent(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println();
+        for (Student student : students) {
+            System.out.println("\n학생 ID: " + student.getStudentId());
+            System.out.println("학생 이름: " + student.getStudentName());
+            System.out.println();
+        }
+        System.out.println("조회 종료를 원하시면 아무 입력을 하세요.");
+        sc.nextLine();
+    }
+
 
     // 수강생의 과목별 회차 점수 수정
     private static void updateTurnScoreBySubject() {
