@@ -1,4 +1,7 @@
+import java.util.List;
+
 public class Score {
+    private List<Score> scores;
     private int scoreId;
     private int studentId;
     private int subjectId;
@@ -8,6 +11,19 @@ public class Score {
 
     public Score(int scoreId, int studentId, int subjectId, int scoreTurn, int score, char scoreGrade) {
         this.scoreId = scoreId;
+        this.studentId = studentId;
+        this.subjectId = subjectId;
+        this.scoreTurn = scoreTurn;
+        this.score = score;
+        this.scoreGrade = scoreGrade;
+    }
+
+    public Score() {
+
+    }
+
+    public Score(List<Score> scores, int studentId, int subjectId, int scoreTurn, int score, char scoreGrade, SubjectType subjectType) {
+        this.scores = scores;
         this.studentId = studentId;
         this.subjectId = subjectId;
         this.scoreTurn = scoreTurn;
@@ -38,6 +54,43 @@ public class Score {
     public char getScoreGrade() {
         return scoreGrade;
     }
+
+    public void addScore(List<Score> scores, int studentId, int subjectId, int scoreTurn, int score, SubjectType subjectType) {
+        this.scores = scores;
+        this.studentId = studentId;
+        this.subjectId = subjectId;
+        this.scoreTurn = scoreTurn;
+        this.score = score;
+
+        for (Score existingScore : scores) {
+            if (existingScore.getStudentId() == studentId
+                    && existingScore.getSubjectId() == subjectId
+                    && existingScore.getScoreTurn() == scoreTurn) {
+                System.out.println("이미 해당 회차에 점수가 등록되어 있습니다.");
+                return;
+            }
+        }
+
+        char scoreGrade = generateScore(score);
+
+        Score newScore = new Score(scores, studentId, subjectId, scoreTurn, score, scoreGrade, subjectType);
+        scores.add(newScore);
+    }
+
+    private char generateScore(int score) {
+        if (score >= 95) {
+            return 'A';
+        } else if (score >= 90) {
+            return 'B';
+        } else if (score >= 80) {
+            return 'C';
+        } else if (score >= 70) {
+            return 'D';
+        } else {
+            return 'F';
+        }
+    }
+
 
     public void patchScore(int score, SubjectType subjectType) {
         this.score = score;

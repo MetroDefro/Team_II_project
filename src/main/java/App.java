@@ -1,92 +1,20 @@
 import java.util.*;
 
 public class App {
-    // 데이터 저장소
-    private static List<Student> students;
-    private static List<Subject> subjects;
-    private static List<Score> scores;
-
-    // index 관리 필드
-    private static int studentIndex;
-    private static final String INDEX_TYPE_STUDENT = "ST";
-    private static int subjectIndex;
-    private static final String INDEX_TYPE_SUBJECT = "SU";
-    private static int scoreIndex;
-    private static final String INDEX_TYPE_SCORE = "SC";
-
+    // 리스트 -> DataManager 클래스에 리스트 관리 / 리스트 생성 / 조회하는 기능 이동
+    
     // 스캐너
     private static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
         // Student, Subject, Score 배열 생성 및 초기화 로직
-        setInitData();
+        DataManager.setInitData();
+
         try {
             displayMainView();
         } catch (Exception e) {
             System.out.println("오류 발생: " + e.getMessage() + "\n프로그램을 종료합니다.");
         }
-    }
-
-    // 초기 데이터 생성
-    private static void setInitData() {
-        students = new ArrayList<>();
-        subjects = List.of(
-                new Subject(
-                        sequence(INDEX_TYPE_SUBJECT),
-                        "Java",
-                        SubjectType.ESSENTIAL
-                ),
-                new Subject(
-                        sequence(INDEX_TYPE_SUBJECT),
-                        "객체지향",
-                        SubjectType.ESSENTIAL
-                ),
-                new Subject(
-                        sequence(INDEX_TYPE_SUBJECT),
-                        "Spring",
-                        SubjectType.ESSENTIAL
-                ),
-                new Subject(
-                        sequence(INDEX_TYPE_SUBJECT),
-                        "JPA",
-                        SubjectType.ESSENTIAL
-                ),
-                new Subject(
-                        sequence(INDEX_TYPE_SUBJECT),
-                        "MySQL",
-                        SubjectType.ESSENTIAL
-                ),
-                new Subject(
-                        sequence(INDEX_TYPE_SUBJECT),
-                        "디자인 패턴",
-                        SubjectType.SELECT
-                ),
-                new Subject(
-                        sequence(INDEX_TYPE_SUBJECT),
-                        "Spring Security",
-                        SubjectType.SELECT
-                ),
-                new Subject(
-                        sequence(INDEX_TYPE_SUBJECT),
-                        "Redis",
-                        SubjectType.SELECT
-                ),
-                new Subject(
-                        sequence(INDEX_TYPE_SUBJECT),
-                        "MongoDB",
-                        SubjectType.SELECT
-                )
-        );
-        scores = new ArrayList<>();
-    }
-
-    // index 자동 증가
-    private static int sequence(String type) {
-        return switch (type) {
-            case INDEX_TYPE_STUDENT -> ++studentIndex;
-            case INDEX_TYPE_SUBJECT -> ++subjectIndex;
-            default -> ++scoreIndex;
-        };
     }
 
     private static void displayMainView() {
@@ -133,7 +61,7 @@ public class App {
 
             try {
                 switch (input) {
-                    case 1 -> Student.studentNew(sc,students); // 수강생 등록
+                    case 1 -> Student.studentNew(DataManager.getStudents()); // 수강생 등록
                     case 2 -> searchAllStudent(); // 수강생 목록 조회
                     case 3 -> searchStudentById(); // 수강생 정보 조회
                     case 4 -> System.out.println("아직 개발 중인 기능입니다..."); // 수강생 정보 수정
@@ -166,7 +94,7 @@ public class App {
             int input = sc.nextInt();
 
             switch (input) {
-                case 1 -> System.out.println("아직 개발 중인 기능입니다..."); // 수강생의 과목별 시험 회차 및 점수 등록
+                case 1 -> createScore(); // 수강생의 과목별 시험 회차 및 점수 등록
                 case 2 -> updateTurnScoreBySubject(); // 수강생의 과목별 회차 점수 수정
                 case 3 -> System.out.println("아직 개발 중인 기능입니다..."); // 수강생의 특정 과목 회차별 등급 조회
                 case 4 -> System.out.println("아직 개발 중인 기능입니다..."); // 수강생의 과목별 평균 등급 조회
@@ -178,6 +106,25 @@ public class App {
                 }
             }
         }
+    }
+
+    // 수강생의 과목별 시험 회차 및 점수 등록
+    private static void createScore() {
+        Student studentIdInput = DataManager.searchStudent(getStudentId());
+        Subject subjectInput = DataManager.searchSubject(getSubjectId());
+
+        Score score = new Score();
+
+        System.out.println("시험 점수 등록 ... ");
+        // 회차 1 ~ 10
+        for(int scoreTurn = 1; scoreTurn <= 10; scoreTurn++) {
+            score.addScore(DataManager.getScores(), studentIdInput.getStudentId(),subjectInput.getSubjectId(),scoreTurn,getScore(),subjectInput.getSubjectType());
+        }
+    }
+
+    private static int getSubjectId() {
+        System.out.print("\n관리할 과목의 번호를 입력하시오...");
+        return Parser.parseId(sc.next());
     }
 
     private static int getStudentId() {
@@ -201,72 +148,11 @@ public class App {
         return Parser.parseScore(sc.next());
     }
 
-    private static Student searchStudent(int studentId) throws InputMismatchException{
-        Optional<Student> studentObj = students.stream()
-                .filter(o -> o.getStudentId() == studentId)
-                .findFirst();
-        // 해당하는 데이터가 없을 경우 예외처리
-        if(studentObj.isPresent()) {
-            return studentObj.get();
-        } else {
-            throw new InputMismatchException("일치하는 학생이 없습니다.\n선택 화면 이동...");
-        }
-    }
-
-    private static Student searchStudent(String studentName) throws InputMismatchException{
-        Optional<Student> studentObj = students.stream()
-                .filter(o -> o.getStudentName().equals(studentName))
-                .findFirst();
-        // 해당하는 데이터가 없을 경우 예외처리
-        if(studentObj.isPresent()) {
-            return studentObj.get();
-        } else {
-            throw new InputMismatchException("일치하는 학생이 없습니다.\n선택 화면 이동...");
-        }
-    }
-
-    private static Subject searchSubject(int subjectId) throws InputMismatchException{
-        Optional<Subject> subjectObj = subjects.stream()
-                .filter(o -> o.getSubjectId() == subjectId)
-                .findFirst();
-        // 해당하는 데이터가 없을 경우 예외처리
-        if(subjectObj.isPresent()) {
-            return subjectObj.get();
-        } else {
-            throw new InputMismatchException("일치하는 과목이 없습니다.\n선택 화면 이동...");
-        }
-    }
-
-    private static Subject searchSubject(String subjectName) throws InputMismatchException{
-        Optional<Subject> subjectObj = subjects.stream()
-                .filter(o -> o.getSubjectName().equals(subjectName))
-                .findFirst();
-        // 해당하는 데이터가 없을 경우 예외처리
-        if(subjectObj.isPresent()) {
-            return subjectObj.get();
-        } else {
-            throw new InputMismatchException("일치하는 과목이 없습니다.\n선택 화면 이동...");
-        }
-    }
-
-    private static Score searchScore(int studentId, int subjectId, int turn) throws InputMismatchException {
-        // scores 조회하여 수강생id, 과목id, 회차가 일치하는 객체 찾기
-        Optional<Score> scoreObj = scores.stream().filter(o -> o.getStudentId() == studentId &&
-                        o.getSubjectId() == subjectId && o.getScoreTurn() == turn)
-                .findFirst();
-        // 해당하는 데이터가 없을 겨우 예외처리
-        if(scoreObj.isPresent()) {
-            return scoreObj.get();
-        } else {
-            throw new InputMismatchException("일치하는 데이터가 없습니다.\n선택 화면 이동...");
-        }
-    }
-
     // 수강생 목록 조회
     public static void searchAllStudent(){
         Scanner sc = new Scanner(System.in);
         System.out.println();
-        for (Student student : students) {
+        for (Student student : DataManager.getStudents()) {
             System.out.println("\n학생 ID: " + student.getStudentId());
             System.out.println("학생 이름: " + student.getStudentName());
             System.out.println();
@@ -302,16 +188,15 @@ public class App {
         } while (choice == 1);
     }
 
-
     // 수강생의 과목별 회차 점수 수정
     private static void updateTurnScoreBySubject() {
         // 기능 구현 (수정할 특정 학생, 과목 및 회차, 점수 입력 받아 변환)
-        Student studentIdInput = searchStudent(getStudentId());
-        Subject subjectInput = searchSubject(getSubjectName());
+        Student studentIdInput = DataManager.searchStudent(getStudentId());
+        Subject subjectInput = DataManager.searchSubject(getSubjectName());
         int turnInput = getTurn();
         int scoreInput = getScore();
         // 정보들을 바탕으로 점수 리스트를 조회해 점수를 받아온다.
-        Score score = searchScore(studentIdInput.getStudentId(), subjectInput.getSubjectId(), turnInput);
+        Score score = DataManager.searchScore(studentIdInput.getStudentId(), subjectInput.getSubjectId(), turnInput);
         System.out.println("시험 점수를 수정합니다...");
         // 해당하는 점수 객체의 점수를 변경한다.
         score.patchScore(scoreInput, subjectInput.subjectType); // 시험 점수 업데이트
