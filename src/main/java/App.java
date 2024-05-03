@@ -110,17 +110,15 @@ public class App {
 
     // 수강생의 과목별 시험 회차 및 점수 등록
     private static void createScore() {
-        int studentId = getStudentId();
-        int subjectId = getSubjectId();
-        // SubjectType이 구현되면 사용
-        // String subjectType = getSubjectType();
+        Student studentIdInput = DataManager.searchStudent(getStudentId());
+        Subject subjectInput = DataManager.searchSubject(getSubjectId());
 
         Score score = new Score();
 
         System.out.println("시험 점수 등록 ... ");
         // 회차 1 ~ 10
         for(int scoreTurn = 1; scoreTurn <= 10; scoreTurn++) {
-            score.addScore(DataManager.getScores(), studentId,subjectId,scoreTurn,getScore());
+            score.addScore(DataManager.getScores(), studentIdInput.getStudentId(),subjectInput.getSubjectId(),scoreTurn,getScore(),subjectInput.getSubjectType());
         }
     }
 
