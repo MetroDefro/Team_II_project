@@ -64,8 +64,8 @@ public class App {
                     case 1 -> Student.studentNew(DataManager.getStudents()); // 수강생 등록
                     case 2 -> searchAllStudent(); // 수강생 목록 조회
                     case 3 -> searchStudentById(); // 수강생 정보 조회
-                    case 4 -> System.out.println("아직 개발 중인 기능입니다..."); // 수강생 정보 수정
-                    case 5 -> System.out.println("아직 개발 중인 기능입니다..."); // 수강생 삭제
+                    case 4 -> changeStudent(); // 수강생 정보 수정
+                    case 5 -> removeStudent(); // 수강생 삭제
                     case 6 -> System.out.println("아직 개발 중인 기능입니다..."); // 상태별 수강생 목록 조회
                     case 7 -> flag = false; // 메인 화면 이동
                     default -> {
@@ -175,7 +175,7 @@ public class App {
                     System.out.println("학생 이름: " + student.getStudentName());
                     System.out.println("과목 목록:");
                     for (Subject sub : student.getStudentSubjects()) {
-                        System.out.println(sub);
+                            System.out.println(sub.getSubjectName());
                     }
                     found = true;
                 }
@@ -186,6 +186,65 @@ public class App {
             System.out.println("추가 조회를 원하시면 1 , 아니면 아무 입력을 하세요.");
             choice = sc.nextInt();
         } while (choice == 1);
+    }
+
+    // 수강생 정보 수정
+    public static void changeStudent(){
+        int choice;
+        do {
+            System.out.print("수정할 학생 ID: ");
+            int id = sc.nextInt();
+            boolean studentFound = false;
+                for (Student student : DataManager.getStudents()) {
+                    if (student.getStudentId() == id) {
+                        System.out.println("기존 이름 : " + student.getStudentName());
+                        System.out.println("이름 수정을 원하면 1, 아니면 아무 입력을 하세요.");
+                        int choice1 = sc.nextInt();
+                        if (choice1 == 1) {
+                            System.out.print("수정할 이름 :");
+                            String newName = sc.next();
+                            student.setStudentName(newName);
+                            studentFound = true;
+                            break;
+                        }else break;
+                    }
+                }
+                if (studentFound) {
+                    System.out.println("이름이 수정되었습니다.");
+                } else {
+                    System.out.println("해당 ID를 가진 학생이 없거나, 수정하지 않았습니다.");
+                }
+
+            System.out.println("추가 수정를 원하시면 1 , 아니면 아무 입력을 하세요.");
+            choice = sc.nextInt();
+        }while (choice == 1);
+    }
+
+
+    // 수강생 삭제
+    public static void removeStudent() {
+        Scanner sc = new Scanner(System.in);
+        int choice;
+        do {
+            System.out.print("삭제할 학생 ID: ");
+            int id = sc.nextInt();
+            boolean studentFound = false;
+            for (Student student : DataManager.getStudents()) {
+                if (student.getStudentId() == id) {
+                    DataManager.getStudents().remove(student); // 해당 학생을 삭제
+                    studentFound = true;
+                    break;
+                }
+            }
+
+            if (studentFound) {
+                System.out.println("학생이 삭제되었습니다.");
+            } else {
+                System.out.println("해당 ID를 가진 학생이 없습니다.");
+            }
+            System.out.println("추가 삭제를 원하시면 1 , 아니면 아무 입력을 하세요.");
+            choice = sc.nextInt();
+        }while (choice == 1);
     }
 
     // 수강생의 과목별 회차 점수 수정
