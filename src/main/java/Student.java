@@ -34,13 +34,12 @@ public class Student {
 
     public static void studentNew() {
         Scanner scanner = new Scanner(System.in);
-
         Set<String> studentSubjects_list_test = new HashSet<String>();
 
-
-        int studentId = DataManager.getStudentIndex();
+        System.out.println();
 
         while (true){
+            int studentId = DataManager.getStudentId();
             // 이름 생성
             System.out.print("학생이름을 입력해주세요 name: ");
             String studentName = scanner.next();
@@ -120,7 +119,7 @@ public class Student {
 
             }
             DataManager.addStudent( new Student(studentId ,studentName, studentSubjects_list));
-
+            studentSubjects_list_test.clear();
 
             System.out.println();
             System.out.print(" 추가를 끝내시겠습니까?  끝내기 = (n) 추가 = (y) \n 입력해 주세요 : ");
