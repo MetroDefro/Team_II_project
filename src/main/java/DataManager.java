@@ -90,13 +90,17 @@ public class DataManager {
         };
     }
 
+    public static int getStudentId() {
+        return sequence(INDEX_TYPE_STUDENT);
+    }
+
+    public static int getScoreId() {
+        return sequence(INDEX_TYPE_SCORE);
+    }
+
     // 추가 기능
     public static void addStudent(Student student) {
         students.add(student);
-    }
-
-    public static void addSubject(Subject subject) {
-        subjects.add(subject);
     }
 
     public static void addScore(Score score) {
@@ -110,14 +114,6 @@ public class DataManager {
 
     public static void removeStudent(String studentName) {
         students.remove(searchStudent(studentName));
-    }
-
-    public static void removeSubject(int subjectId) {
-        subjects.remove(searchSubject(subjectId));
-    }
-
-    public static void removeSubject(String subjectName) {
-        subjects.remove(searchSubject(subjectName));
     }
 
     public static void removeScore(int scoreId) {
