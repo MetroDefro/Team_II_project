@@ -63,7 +63,7 @@ public class App {
                 switch (input) {
                     case 1 -> Student.studentNew(DataManager.getStudents()); // 수강생 등록
                     case 2 -> searchAllStudent(); // 수강생 목록 조회
-                    case 3 -> System.out.println("아직 개발 중인 기능입니다..."); // 수강생 정보 조회
+                    case 3 -> searchStudentById(); // 수강생 정보 조회
                     case 4 -> System.out.println("아직 개발 중인 기능입니다..."); // 수강생 정보 수정
                     case 5 -> System.out.println("아직 개발 중인 기능입니다..."); // 수강생 삭제
                     case 6 -> System.out.println("아직 개발 중인 기능입니다..."); // 상태별 수강생 목록 조회
@@ -159,6 +159,33 @@ public class App {
         }
         System.out.println("조회 종료를 원하시면 아무 입력을 하세요.");
         sc.nextLine();
+    }
+
+    // 수강생 정보 조회
+    public static void searchStudentById() {
+        System.out.println();
+        int choice;
+        do {
+            System.out.print("조회할 학생 ID : ");
+            Scanner sc = new Scanner(System.in);
+            int id = sc.nextInt();
+            boolean found = false;
+            for (Student student : students) {
+                if (student.getStudentId() == id) {
+                    System.out.println("학생 이름: " + student.getStudentName());
+                    System.out.println("과목 목록:");
+                    for (Subject sub : student.getStudentSubjects()) {
+                        System.out.println(sub);
+                    }
+                    found = true;
+                }
+            }
+            if (!found) {
+                System.out.println("해당 학생을 찾을 수 없습니다.");
+            }
+            System.out.println("추가 조회를 원하시면 1 , 아니면 아무 입력을 하세요.");
+            choice = sc.nextInt();
+        } while (choice == 1);
     }
 
     // 수강생의 과목별 회차 점수 수정
