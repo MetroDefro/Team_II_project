@@ -90,6 +90,44 @@ public class DataManager {
         };
     }
 
+    // 추가 기능
+    private static void addStudent(Student student) {
+        students.add(student);
+    }
+
+    private static void addSubject(Subject subject) {
+        subjects.add(subject);
+    }
+
+    private static void addScore(Score score) {
+        scores.add(score);
+    }
+
+    // 삭제 기능
+    private static void removeStudent(int studentId) {
+        students.remove(searchStudent(studentId));
+    }
+
+    private static void removeStudent(String studentName) {
+        students.remove(searchStudent(studentName));
+    }
+
+    private static void removeSubject(int subjectId) {
+        subjects.remove(searchSubject(subjectId));
+    }
+
+    private static void removeSubject(String subjectName) {
+        subjects.remove(searchSubject(subjectName));
+    }
+
+    private static void removeScore(int scoreId) {
+        scores.remove(searchScore(scoreId));
+    }
+
+    private static void removeScore(int studentId, int subjectId, int turn) {
+        scores.remove(searchScore(studentId, subjectId, turn));
+    }
+
     // 수강생 Id로 원하는 수강생 찾기
     public static Student searchStudent(int studentId) throws InputMismatchException {
         Optional<Student> studentObj = students.stream()
@@ -147,6 +185,19 @@ public class DataManager {
         // scores 조회하여 수강생id, 과목id, 회차가 일치하는 객체 찾기
         Optional<Score> scoreObj = scores.stream().filter(o -> o.getStudentId() == studentId &&
                         o.getSubjectId() == subjectId && o.getScoreTurn() == turn)
+                .findFirst();
+        // 해당하는 데이터가 없을 겨우 예외처리
+        if(scoreObj.isPresent()) {
+            return scoreObj.get();
+        } else {
+            throw new InputMismatchException("일치하는 데이터가 없습니다.\n선택 화면 이동...");
+        }
+    }
+
+    // 점수Id로 원하는 점수 찾기
+    public static Score searchScore(int scoreId) throws InputMismatchException {
+        // scores 조회하여 수강생id, 과목id, 회차가 일치하는 객체 찾기
+        Optional<Score> scoreObj = scores.stream().filter(o -> o.getScoreId() == scoreId)
                 .findFirst();
         // 해당하는 데이터가 없을 겨우 예외처리
         if(scoreObj.isPresent()) {
