@@ -27,6 +27,9 @@ public class DataManager {
         return scores;
     }
 
+    // 임시
+    public static int getStudentIndex() { return studentIndex;}
+
 
     // 초기 데이터 생성
     public static void setInitData() {
@@ -82,13 +85,14 @@ public class DataManager {
     }
 
     // index 자동 증가
-    private static int sequence(String type) {
+    public static int sequence(String type) {
         return switch (type) {
             case INDEX_TYPE_STUDENT -> ++studentIndex;
             case INDEX_TYPE_SUBJECT -> ++subjectIndex;
             default -> ++scoreIndex;
         };
     }
+
 
     // 추가 기능
     public static void addStudent(Student student) {
