@@ -57,18 +57,17 @@ public class Score {
 
     public void patchScore(int score, SubjectType subjectType) {
         this.score = score;
-        reteGrade(score, subjectType); // 등급 매기기
+        this.scoreGrade = reteGrade(score, subjectType); // 등급 매기기
     }
 
-    private void reteGrade(int score, SubjectType subjectType) {
-        if (subjectType == SubjectType.ESSENTIAL) { // 과목 타입 별로 등급을 다르게 매긴다.
-            scoreGrade = evaluateGrade(score, 95, 90, 80, 70, 60); // 필수 과목
-        } else if (subjectType == SubjectType.SELECT) { // 선택 과목
-            scoreGrade = evaluateGrade(score, 90, 80, 70, 60, 50);
-        }
+    public static char reteGrade(int score, SubjectType subjectType) {
+        return switch (subjectType) { // 과목 타입 별로 등급을 다르게 매긴다.
+            case ESSENTIAL -> evaluateGrade(score, 95, 90, 80, 70, 60); // 필수 과목
+            case SELECT -> evaluateGrade(score, 90, 80, 70, 60, 50); // 선택 과목
+        };
     }
 
-    private char evaluateGrade(int score, int... thresholds) {
+    private static char evaluateGrade(int score, int... thresholds) {
         char[] grades = {'A', 'B', 'C', 'D', 'F'}; // 등급들
         char grade = 'N'; // 기본 등급 N부터 시작
         for (int i = 0; i < thresholds.length; i++) {
