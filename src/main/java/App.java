@@ -170,7 +170,7 @@ public class App {
             Scanner sc = new Scanner(System.in);
             int id = sc.nextInt();
             boolean found = false;
-            for (Student student : students) {
+            for (Student student : DataManager.getStudents()) {
                 if (student.getStudentId() == id) {
                     System.out.println("학생 이름: " + student.getStudentName());
                     System.out.println("과목 목록:");
