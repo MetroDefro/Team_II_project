@@ -1,4 +1,7 @@
+import java.util.List;
+
 public class Score {
+    private List<Score> scores;
     private int scoreId;
     private int studentId;
     private int subjectId;
@@ -13,6 +16,18 @@ public class Score {
         this.scoreTurn = scoreTurn;
         this.score = score;
         this.scoreGrade = scoreGrade;
+    }
+
+    public Score() {
+
+    }
+
+    public Score(List<Score> scores, int studentId, int subjectId, int scoreTurn, int score) {
+        this.scores = scores;
+        this.studentId = studentId;
+        this.subjectId = subjectId;
+        this.scoreTurn = scoreTurn;
+        this.score = score;
     }
 
     public int getScoreId() {
@@ -37,6 +52,27 @@ public class Score {
 
     public char getScoreGrade() {
         return scoreGrade;
+    }
+
+    public void addScore(List<Score> scores, int studentId, int subjectId, int scoreTurn, int score) {
+        this.scores = scores;
+        this.studentId = studentId;
+        this.subjectId = subjectId;
+        this.scoreTurn = scoreTurn;
+        this.score = score;
+
+        for (Score existingScore : scores) {
+            if (existingScore.getStudentId() == studentId
+                    && existingScore.getSubjectId() == subjectId
+                    && existingScore.getScoreTurn() == scoreTurn) {
+                System.out.println("이미 해당 회차에 점수가 등록되어 있습니다.");
+                return;
+            }
+        }
+        // scoreGrade 수정 필요
+        Score newScore = new Score(scores, studentId, subjectId, scoreTurn, score);
+        scores.add(newScore);
+        System.out.println(scores);
     }
 
     public void patchScore(int score, SubjectType subjectType) {
