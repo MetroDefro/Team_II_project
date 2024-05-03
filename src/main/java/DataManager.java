@@ -91,40 +91,40 @@ public class DataManager {
     }
 
     // 추가 기능
-    private static void addStudent(Student student) {
+    public static void addStudent(Student student) {
         students.add(student);
     }
 
-    private static void addSubject(Subject subject) {
+    public static void addSubject(Subject subject) {
         subjects.add(subject);
     }
 
-    private static void addScore(Score score) {
+    public static void addScore(Score score) {
         scores.add(score);
     }
 
     // 삭제 기능
-    private static void removeStudent(int studentId) {
+    public static void removeStudent(int studentId) {
         students.remove(searchStudent(studentId));
     }
 
-    private static void removeStudent(String studentName) {
+    public static void removeStudent(String studentName) {
         students.remove(searchStudent(studentName));
     }
 
-    private static void removeSubject(int subjectId) {
+    public static void removeSubject(int subjectId) {
         subjects.remove(searchSubject(subjectId));
     }
 
-    private static void removeSubject(String subjectName) {
+    public static void removeSubject(String subjectName) {
         subjects.remove(searchSubject(subjectName));
     }
 
-    private static void removeScore(int scoreId) {
+    public static void removeScore(int scoreId) {
         scores.remove(searchScore(scoreId));
     }
 
-    private static void removeScore(int studentId, int subjectId, int turn) {
+    public static void removeScore(int studentId, int subjectId, int turn) {
         scores.remove(searchScore(studentId, subjectId, turn));
     }
 
