@@ -96,7 +96,7 @@ public class App {
             switch (input) {
                 case 1 -> createScore(); // 수강생의 과목별 시험 회차 및 점수 등록
                 case 2 -> updateTurnScoreBySubject(); // 수강생의 과목별 회차 점수 수정
-                case 3 -> System.out.println("아직 개발 중인 기능입니다..."); // 수강생의 특정 과목 회차별 등급 조회
+                case 3 -> inquiryScoreGrade(); // 수강생의 특정 과목 회차별 등급 조회
                 case 4 -> System.out.println("아직 개발 중인 기능입니다..."); // 수강생의 과목별 평균 등급 조회
                 case 5 -> System.out.println("아직 개발 중인 기능입니다..."); // 특정 상태 수강생들의 필수 과목 평균 등급 조회
                 case 6 -> flag = false; // 메인 화면 이동
@@ -260,5 +260,19 @@ public class App {
         // 해당하는 점수 객체의 점수를 변경한다.
         score.patchScore(scoreInput, subjectInput.subjectType); // 시험 점수 업데이트
         System.out.println("\n점수 수정 성공!");
+    }
+
+    /* 수강생의 특정 과목 회차별 등급 조회 */
+    private static void inquiryScoreGrade() {
+        //입력받기
+        Student studentIdInput = DataManager.searchStudent(getStudentId()); //수강생 ID
+        Subject subjectInput = DataManager.searchSubject(getSubjectName()); //과목 이름
+        int turnInput = getTurn(); //회차
+        Score score = DataManager.searchScore(studentIdInput.getStudentId(), subjectInput.getSubjectId(), turnInput); //점수 조회
+
+        System.out.println(subjectInput.getSubjectName() + "과목의 " + turnInput + "회차 등급을 조회합니다...");
+        char grade = score.getScoreGrade();
+        System.out.println("등급: " + grade);
+
     }
 }
