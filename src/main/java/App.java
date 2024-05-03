@@ -111,16 +111,20 @@ public class App {
     // 수강생의 과목별 시험 회차 및 점수 등록
     private static void createScore() {
         Student studentIdInput = DataManager.searchStudent(getStudentId());
-        Subject subjectInput = DataManager.searchSubject(getSubjectId());
-
-        Score score = new Score();
+        Subject subjectInput = DataManager.searchSubject(getSubjectName());
 
         System.out.println("시험 점수 등록 ... ");
         // 회차 1 ~ 10
-        for(int scoreTurn = 1; scoreTurn <= 10; scoreTurn++) {
-            score.addScore(DataManager.getScores(), studentIdInput.getStudentId(),subjectInput.getSubjectId(),scoreTurn,getScore(),subjectInput.getSubjectType());
+        for (int scoreTurn = 1; scoreTurn <= 10; scoreTurn++) {
+            try {
+                DataManager.addScore(studentIdInput.getStudentId(), subjectInput.getSubjectId(), scoreTurn, getScore(), subjectInput.getSubjectType());
+            } catch (RuntimeException e) {
+                System.out.println(e.getMessage()); // 예외 메시지 출력
+                break; // 반복문 종료
+            }
         }
     }
+
 
     private static int getSubjectId() {
         System.out.print("\n관리할 과목의 번호를 입력하시오...");
