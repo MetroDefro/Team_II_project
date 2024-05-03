@@ -49,7 +49,7 @@ public class Student {
             List<Subject> studentSubjects_list = new ArrayList<>();
             int count = 0;
             int count_sub = 0;
-            System.out.println("등록할 과목을 입력해 주세요 \n 최소 3개 이상의 필수 과목, 2개 이상의 선택 과목을");
+            System.out.println("등록할 과목을 입력해 주세요 \n 최소 3개 이상의 필수 과목, 2개 이상의 선택 과목");
             while (true) {
 
                 if(count < 90){
@@ -60,7 +60,12 @@ public class Student {
                 }
 
                 String subjectName = scanner.next();
-                int subjectId = Parser.parseId(subjectName);
+                String test_int = "^[0-9]*$";
+                int subjectId = 0;
+                if(subjectName.matches(test_int)){
+                    subjectId = Parser.parseId(subjectName);
+                }
+
                 if (count <= 99 && subjectId <= 5 ) {
                     if(studentSubjects_list_test.contains(subjectId)){
                         System.out.println(" 이미 등록하신 과목입니다.");
@@ -73,7 +78,7 @@ public class Student {
                             case 3 -> studentSubjects_list.add(DataManager.getSubjects().get(2));
                             case 4 -> studentSubjects_list.add(DataManager.getSubjects().get(3));
                             case 5 -> studentSubjects_list.add(DataManager.getSubjects().get(4));
-                            default -> System.out.println("오류");
+                            default -> subjectId = 0;
                         }
                         System.out.println(count + "번째 과목 선택됨 = " + DataManager.getSubjects().get(subjectId -1).getSubjectName());
                         System.out.println();
@@ -83,7 +88,8 @@ public class Student {
                         }
                     }
 
-                } else if (count >= 100 || subjectId == 99) {
+                }
+                else if (count >= 100 || subjectId == 99) {
                     System.out.println();
                     count+=100;
 
@@ -99,19 +105,23 @@ public class Student {
                                 case 2 -> studentSubjects_list.add(DataManager.getSubjects().get(6));
                                 case 3 -> studentSubjects_list.add(DataManager.getSubjects().get(7));
                                 case 4 -> studentSubjects_list.add(DataManager.getSubjects().get(8));
-                                default -> System.out.println("오류");
+                                default -> subjectId = 0;
                             }
 
-                            System.out.println(count_sub + " 번째 선택 과목 선택됨 " + DataManager.getSubjects().get(subjectId + 4).getSubjectName());
-                            System.out.println();
+                            if(subjectName.matches(test_int)){
+                                System.out.println(count_sub + " 번째 선택 과목 선택됨 " + DataManager.getSubjects().get(subjectId + 4).getSubjectName());
+                                System.out.println();
+                            }
+
                         }
                         // 여기에 추가
-                        if (count_sub >= 2) {
+                        if (count_sub >= 2 && subjectName.matches(test_int)) {
                             System.out.print("2개 이상입니다. 완료 하려면 (end) or (exit)을 입력해 주세요 : ");
                             System.out.println();
                         }
                     }
-                } else{
+                }
+                else{
                     System.out.println("제대로 된 과목을 입력해 주세요");
                 }
                 if (subjectName.equals("end") || subjectName.equals("exit")) {
