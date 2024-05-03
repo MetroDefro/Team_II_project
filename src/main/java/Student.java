@@ -23,6 +23,11 @@ public class Student {
         return studentName;
     }
 
+    public String setStudentName(String studentName) {
+        this.studentName = studentName;
+        return studentName;
+    }
+
     public List<Subject> getStudentSubjects() {
         return studentSubjects;
     }
