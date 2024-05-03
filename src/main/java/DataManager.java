@@ -205,4 +205,41 @@ public class DataManager {
             throw new InputMismatchException("일치하는 데이터가 없습니다.\n선택 화면 이동...");
         }
     }
+
+    // 기존 addScore 메서드 수정 : 회차별 점수 추가
+    public static void addScore(int studentId, int subjectId, int turn, int score, SubjectType subjectType) {
+        // 중복 검사
+        if(isScoreAlreadyExist(studentId,subjectId,turn)) {
+            throw new RuntimeException("이미 해당 회차에 점수가 등록되어 있습니다.");
+        }
+
+        char scoreGrade = generateGrade(score);
+        Score newScore = new Score(studentId, subjectId, turn, score, scoreGrade, subjectType);
+        scores.add(newScore);
+    }
+    // 중복 검사
+    private static boolean isScoreAlreadyExist(int studentId, int subjectId, int turn) {
+        for (Score existingScore : scores) {
+            if (existingScore.getStudentId() == studentId
+                    && existingScore.getSubjectId() == subjectId
+                    && existingScore.getScoreTurn() == turn) {
+                return true;
+            }
+        }
+        return false;
+    }
+    // 등급 산출
+    private static char generateGrade(int score) {
+        if (score >= 95) {
+            return 'A';
+        } else if (score >= 90) {
+            return 'B';
+        } else if (score >= 80) {
+            return 'C';
+        } else if (score >= 70) {
+            return 'D';
+        } else {
+            return 'F';
+        }
+    }
 }
