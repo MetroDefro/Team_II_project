@@ -29,7 +29,9 @@ public class Student {
 
 
 
-    public static void studentNew(Scanner scanner, List<Student> students) {
+    public static void studentNew(List<Student> students) {
+        Scanner scanner = new Scanner(System.in);
+
         while (true){
             System.out.print("학생 ID를 입력해주세요 id: ");
             int studentId = Parser.parseId(scanner.next());
@@ -55,8 +57,6 @@ public class Student {
             System.out.println();
 
             // 과목 등록
-
-
             List<Subject> studentSubjects_list = new ArrayList<>();
             int count = 0;
             int count_sub = 0;
@@ -73,23 +73,40 @@ public class Student {
                 String SubjectName = scanner.next();
                 if (count <= 99 && SubjectName.equals("java") || SubjectName.equals("객체지향") || SubjectName.equals("spring") || SubjectName.equals("jpa") || SubjectName.equals("mysql")) {
                     count++;
+
+                    switch (SubjectName) {
+                        case "java" -> studentSubjects_list.add(DataManager.getSubjects().get(0));
+                        case "객체지향" -> studentSubjects_list.add(DataManager.getSubjects().get(1));
+                        case "spring" -> studentSubjects_list.add(DataManager.getSubjects().get(2));
+                        case "jpa" -> studentSubjects_list.add(DataManager.getSubjects().get(3));
+                        case "mysql" -> studentSubjects_list.add(DataManager.getSubjects().get(4));
+                        default -> System.out.println("오류");
+                    }
                     System.out.println(count + "번째 과목 선택됨 = " + SubjectName);
                     System.out.println();
-                    // 여기에 추가
-
-                    System.out.print("과목을 입력해주세요 : ");
 
                     if (count >= 3 && count<= 100){
                         System.out.println("3개 이상입니다. \n 선택과목을 선택하려면 (선택) 을 입력해 주세요");
                     }
 
                 } else if (count >= 100 || SubjectName.equals("선택")) {
+                    System.out.println();
                     count+=100;
 
                     if (SubjectName.equals("디자인_패턴") || SubjectName.equals("spring_security") || SubjectName.equals("redis") || SubjectName.equals("mongodb")){
                         count_sub++;
-                        System.out.println();
+
+                        switch (SubjectName) {
+                            case "디자인_패턴" -> studentSubjects_list.add(DataManager.getSubjects().get(5));
+                            case "spring_security" -> studentSubjects_list.add(DataManager.getSubjects().get(6));
+                            case "redis" -> studentSubjects_list.add(DataManager.getSubjects().get(7));
+                            case "mongodb" -> studentSubjects_list.add(DataManager.getSubjects().get(8));
+                            default -> System.out.println("오류");
+                        }
+
                         System.out.println(count_sub+ " 번째 선택 과목 선택됨 " + SubjectName);
+                        System.out.println();
+
                         // 여기에 추가
                         if (count_sub >= 2) {
                             System.out.print("2개 이상입니다. 완료 하려면 (end) or (끝)을 입력해 주세요 : ");
@@ -107,7 +124,7 @@ public class Student {
             students.add(new Student(studentId,studentName, studentSubjects_list));
 
             System.out.println();
-            System.out.print(" 추가를 끝내시겠습니까?  y = (n) 추가 = (y) \n 입력해 주세요 : ");
+            System.out.print(" 추가를 끝내시겠습니까?  끝내기 = (n) 추가 = (y) \n 입력해 주세요 : ");
             String next = scanner.next();
             if(next.equals("n")){
                 break;
