@@ -1,5 +1,3 @@
-package Manager;
-
 import java.util.Scanner;
 
 public class StudentManager extends Manager{

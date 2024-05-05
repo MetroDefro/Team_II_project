@@ -1,5 +1,4 @@
-import Manager.ScoreManager;
-import Manager.StudentManager;
+import java.util.*;
 
 public class App {
     // 리스트 -> DataManager 클래스에 리스트 관리 / 리스트 생성 / 조회하는 기능 이동
