@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class DataManager {
+public class DataRegistry {
     // 데이터 저장소
     private static List<Student> students;
     private static List<Subject> subjects;
