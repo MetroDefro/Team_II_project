@@ -1,3 +1,5 @@
+package Manager;
+
 import java.util.InputMismatchException;
 
 public class ScoreManager extends Manager{
