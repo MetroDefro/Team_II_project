@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Scanner;
 
 public class StudentManager extends Manager{
@@ -23,7 +24,7 @@ public class StudentManager extends Manager{
                     case 3 -> searchStudentById(); // 수강생 정보 조회
                     case 4 -> changeStudent(); // 수강생 정보 수정
                     case 5 -> removeStudent(); // 수강생 삭제
-                    case 6 -> System.out.println("아직 개발 중인 기능입니다..."); // 상태별 수강생 목록 조회
+                    case 6 -> searchStudentByState(); // 상태별 수강생 목록 조회
                     case 7 -> flag = false; // 메인 화면 이동
                 }
             } catch (Exception e) {
@@ -131,5 +132,15 @@ public class StudentManager extends Manager{
             System.out.println("추가 삭제를 원하시면 1 , 아니면 아무 입력을 하세요.");
             choice = sc.nextInt();
         }while (choice == 1);
+    }
+
+    // 상태별 수강생 목록 조회
+    public static void searchStudentByState() {
+        List<Student> studentList = DataRegistry.searchStudentList(UserInputReader.getStudentState());
+        for (Student student : studentList) {
+            System.out.println("\n학생 ID: " + student.getStudentId());
+            System.out.println("학생 이름: " + student.getStudentName());
+            System.out.println();
+        }
     }
 }

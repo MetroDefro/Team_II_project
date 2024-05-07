@@ -46,4 +46,13 @@ public class Parser {
         // if문에서 걸러져 나왔을 경우
         throw new InputMismatchException("올바른 번호를 입력하시오...(0 ~ 100 정수)"); // exception 만들어 던짐
     }
+
+    public static StateType parseState(String input) throws InputMismatchException {
+        return switch (input) {
+            case "RED" -> StateType.RED;
+            case "GREEN" -> StateType.GREEN;
+            case "YELLOW" ->StateType.YELLOW;
+            default -> throw new InputMismatchException("올바른 상태를 입력하시오...(RED, GREEN, YELLOW)"); // exception 만들어 던짐
+        };
+    }
 }
