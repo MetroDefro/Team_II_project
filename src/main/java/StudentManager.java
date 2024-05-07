@@ -176,7 +176,6 @@ public class StudentManager extends Manager{
             List<Subject> studentSubjects_list = new ArrayList<>();
             boolean SubjectsMain = false;
             boolean SubjectsSub  = false;
-            boolean studentEnd = false;
             String test_int = "^[0-9]*$";
 
             System.out.println("\n 등록할 과목을 입력해 주세요 \n 최소 3개 이상의 필수 과목, 2개 이상의 선택 과목");
@@ -199,7 +198,7 @@ public class StudentManager extends Manager{
                 }else if (!SubjectsSub) {
                     //서브
                     SubjectsSub = studentNewSubjectsSub( studentSubjects_list_test, subjectId, studentSubjects_list );
-                }else if(SubjectsSub && subjectId <= 3) {
+                }else if(subjectId <= 3) {
                     // 상태
                     StateType stateType = studentNewStateType(subjectId);
                     // 생성 완료
