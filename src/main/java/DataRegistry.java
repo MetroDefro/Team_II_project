@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class DataRegistry {
     // 데이터 저장소
@@ -13,6 +14,9 @@ public class DataRegistry {
     private static final String INDEX_TYPE_SUBJECT = "SU";
     private static int scoreIndex;
     private static final String INDEX_TYPE_SCORE = "SC";
+    private static int stateIndex;
+    private static final String RED = "RED";
+
 
     // getter
     public static List<Student> getStudents() {
@@ -84,6 +88,7 @@ public class DataRegistry {
         scores = new ArrayList<>();
     }
 
+
     // index 자동 증가
     public static int sequence(String type) {
         return switch (type) {
@@ -148,6 +153,18 @@ public class DataRegistry {
         // 해당하는 데이터가 없을 경우 예외처리
         if(studentObj.isPresent()) {
             return studentObj.get();
+        } else {
+            throw new InputMismatchException("일치하는 학생이 없습니다.\n선택 화면 이동...");
+        }
+    }
+
+    // 수강생 상태로 원하는 수강생 리스트 찾기
+    public static List<Student> searchStudentList(StateType stateType) throws InputMismatchException{
+        List<Student> studentList = students.stream()
+                .filter(o -> o.getStateType() == stateType).toList();
+        // 해당하는 데이터가 없을 경우 예외처리
+        if(!studentList.isEmpty()) {
+            return studentList;
         } else {
             throw new InputMismatchException("일치하는 학생이 없습니다.\n선택 화면 이동...");
         }
