@@ -40,4 +40,17 @@ public class App {
         }
         System.out.println("프로그램을 종료합니다.");
     }
+
+    /* 수강생의 특정 과목 회차별 등급 조회 */
+    private static void inquiryScoreGrade() {
+        //입력받기
+        Student studentIdInput = DataManager.searchStudent(getStudentId()); //수강생 ID
+        Subject subjectInput = DataManager.searchSubject(getSubjectName()); //과목 이름
+        int turnInput = getTurn(); //회차
+        Score score = DataManager.searchScore(studentIdInput.getStudentId(), subjectInput.getSubjectId(), turnInput); //점수 조회
+
+        System.out.println(subjectInput.getSubjectName() + "과목의 " + turnInput + "회차 등급을 조회합니다...");
+        char grade = score.getScoreGrade();
+        System.out.println("등급: " + grade);
+    }
 }
