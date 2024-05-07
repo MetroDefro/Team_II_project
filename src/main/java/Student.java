@@ -48,8 +48,7 @@ public class Student {
         StateType stateType = null;
         System.out.println();
 
-        while (true) {
-            int studentId = DataManager.getStudentId();
+
         while (true){
             int studentId = DataRegistry.getStudentId();
             // 이름 생성
@@ -93,7 +92,7 @@ public class Student {
                             case 5 -> studentSubjects_list.add(DataRegistry.getSubjects().get(4));
                             default -> subjectId = 0;
                         }
-                        System.out.println(count + "번째 과목 선택됨 = " + DataManager.getSubjects().get(subjectId - 1).getSubjectName());
+
                         System.out.println(count + "번째 과목 선택됨 = " + DataRegistry.getSubjects().get(subjectId -1).getSubjectName());
                         System.out.println();
 
@@ -122,8 +121,7 @@ public class Student {
                                 default -> subjectId = 0;
                             }
 
-                            if (subjectName.matches(test_int)) {
-                                System.out.println(count_sub + " 번째 선택 과목 선택됨 " + DataManager.getSubjects().get(subjectId + 4).getSubjectName());
+
                             if(subjectName.matches(test_int)){
                                 System.out.println(count_sub + " 번째 선택 과목 선택됨 " + DataRegistry.getSubjects().get(subjectId + 4).getSubjectName());
                                 System.out.println();
@@ -152,8 +150,7 @@ public class Student {
                     System.out.println("제대로 된 과목을 입력해 주세요");
                 }
             }
-            DataManager.addStudent(new Student(studentId, studentName, studentSubjects_list, stateType));
-            DataRegistry.addStudent( new Student(studentId ,studentName, studentSubjects_list));
+            DataRegistry.addStudent( new Student(studentId ,studentName, studentSubjects_list,stateType));
             studentSubjects_list_test.clear();
 
             System.out.println();
