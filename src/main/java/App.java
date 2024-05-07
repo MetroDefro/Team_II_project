@@ -155,6 +155,7 @@ public class App {
         for (Student student : DataManager.getStudents()) {
             System.out.println("\n학생 ID: " + student.getStudentId());
             System.out.println("학생 이름: " + student.getStudentName());
+            System.out.println("학생 상태: " + student.getStateType());
             System.out.println();
         }
         System.out.println("조회 종료를 원하시면 아무 입력을 하세요.");
@@ -173,6 +174,7 @@ public class App {
             for (Student student : DataManager.getStudents()) {
                 if (student.getStudentId() == id) {
                     System.out.println("학생 이름: " + student.getStudentName());
+                    System.out.println("학생 상태 " + student.getStateType());
                     System.out.println("과목 목록:");
                     for (Subject sub : student.getStudentSubjects()) {
                             System.out.println(sub.getSubjectName());
