@@ -39,7 +39,7 @@ public class Student {
         System.out.println();
 
         while (true){
-            int studentId = DataManager.getStudentId();
+            int studentId = DataRegistry.getStudentId();
             // 이름 생성
             System.out.print("학생이름을 입력해주세요 name: ");
             String studentName = scanner.next();
@@ -73,14 +73,14 @@ public class Student {
                         studentSubjects_list_test.add(subjectId);
                         count++;
                         switch (subjectId) {
-                            case 1 -> studentSubjects_list.add(DataManager.getSubjects().get(0));
-                            case 2 -> studentSubjects_list.add(DataManager.getSubjects().get(1));
-                            case 3 -> studentSubjects_list.add(DataManager.getSubjects().get(2));
-                            case 4 -> studentSubjects_list.add(DataManager.getSubjects().get(3));
-                            case 5 -> studentSubjects_list.add(DataManager.getSubjects().get(4));
+                            case 1 -> studentSubjects_list.add(DataRegistry.getSubjects().get(0));
+                            case 2 -> studentSubjects_list.add(DataRegistry.getSubjects().get(1));
+                            case 3 -> studentSubjects_list.add(DataRegistry.getSubjects().get(2));
+                            case 4 -> studentSubjects_list.add(DataRegistry.getSubjects().get(3));
+                            case 5 -> studentSubjects_list.add(DataRegistry.getSubjects().get(4));
                             default -> subjectId = 0;
                         }
-                        System.out.println(count + "번째 과목 선택됨 = " + DataManager.getSubjects().get(subjectId -1).getSubjectName());
+                        System.out.println(count + "번째 과목 선택됨 = " + DataRegistry.getSubjects().get(subjectId -1).getSubjectName());
                         System.out.println();
 
                         if (count >= 3 && count <= 100) {
@@ -101,15 +101,15 @@ public class Student {
                             count_sub++;
                             studentSubjects_list_test.add(subjectId + 10);
                             switch (subjectId) {
-                                case 1 -> studentSubjects_list.add(DataManager.getSubjects().get(5));
-                                case 2 -> studentSubjects_list.add(DataManager.getSubjects().get(6));
-                                case 3 -> studentSubjects_list.add(DataManager.getSubjects().get(7));
-                                case 4 -> studentSubjects_list.add(DataManager.getSubjects().get(8));
+                                case 1 -> studentSubjects_list.add(DataRegistry.getSubjects().get(5));
+                                case 2 -> studentSubjects_list.add(DataRegistry.getSubjects().get(6));
+                                case 3 -> studentSubjects_list.add(DataRegistry.getSubjects().get(7));
+                                case 4 -> studentSubjects_list.add(DataRegistry.getSubjects().get(8));
                                 default -> subjectId = 0;
                             }
 
                             if(subjectName.matches(test_int)){
-                                System.out.println(count_sub + " 번째 선택 과목 선택됨 " + DataManager.getSubjects().get(subjectId + 4).getSubjectName());
+                                System.out.println(count_sub + " 번째 선택 과목 선택됨 " + DataRegistry.getSubjects().get(subjectId + 4).getSubjectName());
                                 System.out.println();
                             }
 
@@ -129,7 +129,7 @@ public class Student {
                 }
 
             }
-            DataManager.addStudent( new Student(studentId ,studentName, studentSubjects_list));
+            DataRegistry.addStudent( new Student(studentId ,studentName, studentSubjects_list));
             studentSubjects_list_test.clear();
 
             System.out.println();

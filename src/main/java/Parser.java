@@ -3,6 +3,17 @@ import java.util.InputMismatchException;
 // 입력 값의 예외 처리 및 파싱을 담당하는 클래스
 public class Parser {
 
+    // String을 int로 변환. 범위 내의 옵션이 들어오지 않을 경우 예외처리
+    public static int parseOption(String input, int optionCount) throws InputMismatchException { // int 파싱
+        if(input.matches("^[0-9]+$")) { // 정규식 검사
+            if(Integer.parseInt(input) <= optionCount) {
+                return Integer.parseInt(input);
+            }
+        }
+        // if문에서 걸러져 나왔을 경우
+        throw new InputMismatchException("잘못된 입력입니다.\n되돌아갑니다!"); // exception 만들어 던짐
+    }
+
     // String을 int로 변환. 올바른Id(0 이상 정수)가 들어오지 않을 시 예외처리
     public static int parseId(String input) throws InputMismatchException { // int 파싱
         if(input.matches("^[0-9]+$")) { // 정규식 검사
