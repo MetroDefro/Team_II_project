@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class Student {
-    private int  studentId ;
+    private  int  studentId ;
     private String  studentName ;
     private List<Subject> studentSubjects;
     StateType stateType;
@@ -33,7 +33,7 @@ public class Student {
             case 1 -> this.stateType = StateType.RED;
             case 2 -> this.stateType = StateType.YELLOW;
             case 3 -> this.stateType = StateType.GREEN;
-            default -> this.stateType = StateType.RED;
+            default -> getStateType();
         };
     }
 
@@ -61,7 +61,7 @@ public class Student {
             int count = 0;
             int count_sub = 0;
             System.out.println("등록할 과목을 입력해 주세요 \n 최소 3개 이상의 필수 과목, 2개 이상의 선택 과목");
-            int stats_s = 0;
+            int stats_s;
             while (true) {
 
                 if (count < 90) {
@@ -135,7 +135,7 @@ public class Student {
                         }
                     }else if (count_sub < 900  && count >= 1000 || subjectId == 888) {
                         count_sub += 999;
-                        System.out.print("상태입력 1.red 2.yellow 3.green  : ");
+                        System.out.print("상태입력 1, RED 2, YELLOW 3,GREEN : ");
 
                         stats_s = scanner.nextInt();
                         switch (stats_s) {

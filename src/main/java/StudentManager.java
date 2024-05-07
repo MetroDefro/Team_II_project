@@ -59,6 +59,7 @@ public class StudentManager extends Manager{
             for (Student student : DataRegistry.getStudents()) {
                 if (student.getStudentId() == id) {
                     System.out.println("학생 이름: " + student.getStudentName());
+                    System.out.println("학생 상태: " + student.getStateType());
                     System.out.println("과목 목록:");
                     for (Subject sub : student.getStudentSubjects()) {
                         System.out.println(sub.getSubjectName());
@@ -85,12 +86,28 @@ public class StudentManager extends Manager{
             for (Student student : DataRegistry.getStudents()) {
                 if (student.getStudentId() == id) {
                     System.out.println("기존 이름 : " + student.getStudentName());
-                    System.out.println("이름 수정을 원하면 1, 아니면 아무 입력을 하세요.");
+                    System.out.println("기존 이름 : " + student.getStateType());
+                    System.out.println("이름 수정을 원하면 1, 상태 수정을 원하면 2, 아니면 아무 입력을 하세요.");
                     int choice1 = sc.nextInt();
                     if (choice1 == 1) {
                         System.out.print("수정할 이름 :");
                         String newName = sc.next();
                         student.setStudentName(newName);
+                        studentFound = true;
+                        break;
+                    }else if (choice1 == 2) {
+                        System.out.print("상태 수정 1, RED 2, YELLOW 3,GREEN : ");
+                        String changeStateType = sc.next();
+                        String test_int = "^[0-9]*$";
+                        int changeStateType_int;
+                        if (changeStateType.matches(test_int)) {
+                            changeStateType_int = Parser.parseId(changeStateType);
+                            if (changeStateType_int <= 3) {
+                                student.setStateType(changeStateType_int);
+                            }else{
+                                System.out.println("1부터 3까지중 선택해 주세요");
+                            }
+                        }
                         studentFound = true;
                         break;
                     }else break;
