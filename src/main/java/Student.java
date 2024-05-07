@@ -33,7 +33,7 @@ public class Student {
             case 1 -> this.stateType = StateType.RED;
             case 2 -> this.stateType = StateType.YELLOW;
             case 3 -> this.stateType = StateType.GREEN;
-            default -> this.stateType = StateType.RED;
+            default -> getStateType();
         };
     }
 
@@ -135,7 +135,7 @@ public class Student {
                         }
                     }else if (count_sub < 900  && count >= 1000 || subjectId == 888) {
                         count_sub += 999;
-                        System.out.print("상태입력 1.red 2.yellow 3.green  : ");
+                        System.out.print("상태입력 1, RED 2, YELLOW 3,GREEN : ");
 
                         stats_s = scanner.nextInt();
                         switch (stats_s) {
