@@ -35,4 +35,9 @@ public class UserInputReader {
         System.out.print("\n점수를 입력하시오...");
         return Parser.parseScore(sc.next());
     }
+
+    public static StateType getStudentState() {
+        System.out.print("\n상태를 입력하시오...");
+        return Parser.parseState(sc.next());
+    }
 }
