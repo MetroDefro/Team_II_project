@@ -8,6 +8,7 @@ public class Score {
     private int scoreTurn;
     private int score;
     private char scoreGrade;
+    private int totalScore;
 
     public Score(int scoreId, int studentId, int subjectId, int scoreTurn, int score, char scoreGrade) {
         this.scoreId = scoreId;
@@ -18,8 +19,10 @@ public class Score {
         this.scoreGrade = scoreGrade;
     }
 
-    public Score() {
-
+    public Score(int studentId, int subjectId, int totalScore, SubjectType subjectType) {
+        this.studentId = studentId;
+        this.subjectId = subjectId;
+        this.totalScore = totalScore;
     }
 
     public Score(int studentId, int subjectId, int scoreTurn, int score, char scoreGrade, SubjectType subjectType) {
@@ -52,6 +55,10 @@ public class Score {
 
     public char getScoreGrade() {
         return scoreGrade;
+    }
+
+    public int getTotalScore() {
+        return totalScore;
     }
 
 

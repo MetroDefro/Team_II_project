@@ -1,7 +1,7 @@
 import java.util.Arrays;
 import java.util.InputMismatchException;
 
-public class ScoreManager extends Manager{
+public class ScoreManager extends Manager {
     @Override
     public void displayView() {
         boolean flag = true;
@@ -22,7 +22,7 @@ public class ScoreManager extends Manager{
                     case 2 -> updateTurnScoreBySubject(); // 수강생의 과목별 회차 점수 수정
                     case 3 -> inquiryScoreGrade(); // 수강생의 특정 과목 회차별 등급 조회
                     case 4 -> averageOfScoreGrade(); // 수강생의 과목별 평균 등급 조회
-                    case 5 -> System.out.println("아직 개발 중인 기능입니다..."); // 특정 상태 수강생들의 필수 과목 평균 등급 조회
+                    case 5 -> inquiryEssentialSubjectAvgGrade(); // 특정 상태 수강생들의 필수 과목 평균 등급 조회
                     case 6 -> flag = false; // 메인 화면 이동
                 }
             } catch (InputMismatchException e) {
@@ -35,20 +35,30 @@ public class ScoreManager extends Manager{
     // 수강생의 과목별 시험 회차 및 점수 등록
     private static void createScore() {
         Student studentIdInput = DataRegistry.searchStudent(UserInputReader.getStudentId());
+        for(Subject subject : studentIdInput.getStudentSubjects()) {
+            System.out.print(subject.getSubjectName() + " ") ;
+        }
         Subject subjectInput = DataRegistry.searchSubject(UserInputReader.getSubjectName());
+        int totalScore = 0;
 
         System.out.println("시험 점수 등록 ... ");
         // 회차 1 ~ 10
         for (int scoreTurn = 1; scoreTurn <= 10; scoreTurn++) {
+            System.out.print(scoreTurn + " 회차 ");
+            int inputScore = UserInputReader.getScore(); // 점수 입력
+            totalScore += inputScore;
             try {
                 DataRegistry.addScore(studentIdInput.getStudentId(), subjectInput.getSubjectId(), scoreTurn
-                        , UserInputReader.getScore(), subjectInput.getSubjectType());
+                        , inputScore, subjectInput.getSubjectType());
             } catch (RuntimeException e) {
                 System.out.println(e.getMessage()); // 예외 메시지 출력
                 break; // 반복문 종료
             }
         }
+        // 총 점수
+        DataRegistry.addScore(studentIdInput.getStudentId(),subjectInput.getSubjectId(),totalScore, subjectInput.getSubjectType());
     }
+
     // 수강생의 과목별 회차 점수 수정
     private static void updateTurnScoreBySubject() {
         // 기능 구현 (수정할 특정 학생, 과목 및 회차, 점수 입력 받아 변환)
@@ -91,7 +101,31 @@ public class ScoreManager extends Manager{
         //모든 점수의 평균
         double averageOfScore = Arrays.stream(scores).average().orElse(0);
         //평균 점수의 등급 구하기
-        char aveGrade = Score.reteGrade((int)averageOfScore, subjectInput.getSubjectType());
+        char aveGrade = Score.reteGrade((int) averageOfScore, subjectInput.getSubjectType());
         System.out.println("[" + subjectInput.getSubjectName() + "]과목의 평균 등급은 " + aveGrade);
+    }
+
+    // 특정 상태 수강생들의 필수 과목 평균 등급 조회
+    private static void inquiryEssentialSubjectAvgGrade() {
+        StateType inputStudentStatus = UserInputReader.getStudentState();
+
+        // 1-1. 상태에 따른 학생들을 먼저 조회한 뒤 해당 학생들의 과목에서 추려야 함
+        for (Student studentInput : DataRegistry.searchStudent(inputStudentStatus)) {
+            int totalScore = 0;
+            // 1-2. 학생들의 과목에서 과목 타입으로 필수 과목 가져오기 (과목 여러개)
+            for (Subject subject : studentInput.getStudentSubjects()) {
+                if (DataRegistry.searchSubject(SubjectType.ESSENTIAL).contains(subject)) {
+                    Score score = DataRegistry.searchTotalScore(studentInput.getStudentId(), subject.getSubjectId());
+                    // 2. 각 과목을 통해 평균 조회
+                    int avgScore = score.getTotalScore() / 10;
+                    char avgGrade = Score.reteGrade(avgScore, SubjectType.ESSENTIAL);
+                    System.out.println("이름 : " + studentInput.getStudentName());
+                    System.out.println("과목 : " + subject.getSubjectName());
+                    System.out.println("총점 : " + score.getTotalScore());
+                    System.out.println("평균 등급 : " + avgGrade);
+                    System.out.println("=============================================");
+                }
+            }
+        }
     }
 }
