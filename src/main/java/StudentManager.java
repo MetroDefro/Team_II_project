@@ -1,5 +1,4 @@
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class StudentManager extends Manager{
     @Override
@@ -19,7 +18,7 @@ public class StudentManager extends Manager{
             try {
                 int input = UserInputReader.getOption(7);
                 switch (input) {
-                    case 1 -> Student.studentNew(); // 수강생 등록
+                    case 1 -> studentNew(); // 수강생 등록
                     case 2 -> searchAllStudent(); // 수강생 목록 조회
                     case 3 -> searchStudentById(); // 수강생 정보 조회
                     case 4 -> changeStudent(); // 수강생 정보 수정
@@ -124,7 +123,6 @@ public class StudentManager extends Manager{
         }while (choice == 1);
     }
 
-
     // 수강생 삭제
     public static void removeStudent() {
         Scanner sc = new Scanner(System.in);
@@ -160,4 +158,128 @@ public class StudentManager extends Manager{
             System.out.println();
         }
     }
+
+    // 수강생 생성
+    public static void studentNew() {
+        while (true){
+            Scanner scanner = new Scanner(System.in);
+
+            // ID값 등록
+            int studentId = DataRegistry.getStudentId();
+
+            // 이름 등록
+            System.out.print("\n학생이름을 입력해주세요 name: ");
+            String studentName = scanner.next();
+
+            // 과목 등록
+            Set<Integer> studentSubjects_list_test = new HashSet<>();
+            List<Subject> studentSubjects_list = new ArrayList<>();
+            boolean SubjectsMain = false;
+            boolean SubjectsSub  = false;
+            String test_int = "^[0-9]*$";
+
+            System.out.println("\n 등록할 과목을 입력해 주세요 \n 최소 3개 이상의 필수 과목, 2개 이상의 선택 과목");
+            while (true) {
+                if (!SubjectsMain) System.out.print("필수 과목 : 1.Java , 2.객체지향 , 3.Spring , 4.JPA , 5.MySQL  \n 입력해주세요 : ");
+                else if (!SubjectsSub) System.out.print("선택 과목 : 1.디자인 패턴 , 2.Spring Security , 3.Redis , 4.MongoDB \n 입력해주세요 :  ");
+                else System.out.print( "\n 상태입력 1, RED 2, YELLOW 3,GREEN : ");
+
+                String subjectName = scanner.next();
+                // 문자열을 감지해 => 정수값
+
+                int subjectId = 0;
+                if (subjectName.matches(test_int)) {
+                    subjectId = Parser.parseId(subjectName);
+                }
+
+                if (!SubjectsMain) {
+                    // 메인
+                    SubjectsMain = studentNewSubjectsMain( studentSubjects_list_test, subjectId, studentSubjects_list );
+                }else if (!SubjectsSub) {
+                    //서브
+                    SubjectsSub = studentNewSubjectsSub( studentSubjects_list_test, subjectId, studentSubjects_list );
+                }else if(subjectId <= 3) {
+                    // 상태
+                    StateType stateType = studentNewStateType(subjectId);
+                    // 생성 완료
+                    DataRegistry.addStudent( new Student(studentId ,studentName, studentSubjects_list,stateType));
+                    break;
+                }else {
+                    System.out.println("지정 범위내의 값을 입력해 주세요");
+                }
+            }
+
+            System.out.print("\n 추가를 끝내시겠습니까?  끝내기 = (n) 추가 = (y) \n 입력해 주세요 : ");
+            String next = scanner.next();
+            if (next.equals("n")) {
+                break;
+            }
+        }
+    }
+
+    // 매인 수업
+    private static boolean studentNewSubjectsMain(Set<Integer> studentSubjects_list_test, int subjectId, List<Subject> studentSubjects_list) {
+        boolean SubjectsMain = false;
+        if (studentSubjects_list_test.contains( subjectId )) {
+            System.out.println(" 이미 등록하신 과목입니다.");
+        } else if (subjectId == 99) {
+            SubjectsMain = true;
+            studentSubjects_list_test.clear();
+        }else {
+            studentSubjects_list_test.add( subjectId );
+            switch (subjectId) {
+                case 1 -> studentSubjects_list.add( DataRegistry.getSubjects().get( 0));
+                case 2 -> studentSubjects_list.add( DataRegistry.getSubjects().get( 1));
+                case 3 -> studentSubjects_list.add( DataRegistry.getSubjects().get( 2));
+                case 4 -> studentSubjects_list.add( DataRegistry.getSubjects().get( 3));
+                case 5 -> studentSubjects_list.add( DataRegistry.getSubjects().get( 4));
+                default -> System.out.println("지정 범위내의 값을 입력해 주세요");
+            }
+            System.out.println( studentSubjects_list_test.size() + "번째 과목 선택됨 = " + DataRegistry.getSubjects().get( subjectId -1).getSubjectName());
+            System.out.println();
+            if (studentSubjects_list_test.size() >= 3) {
+                System.out.println("3개 이상입니다. \n 선택과목을 선택하려면 '99' 을 입력해 주세요");
+                System.out.println();
+            }
+        }
+        return SubjectsMain;
+    }
+    // 서브 수업
+    private static boolean studentNewSubjectsSub(Set<Integer> studentSubjects_list_test, int subjectId, List<Subject> studentSubjects_list) {
+
+        boolean SubjectsSub = false;
+        if (studentSubjects_list_test.contains( subjectId + 10 )) {
+            System.out.println( " 이미 등록하신 과목입니다." );
+        } else if (subjectId == 99 ) {
+            SubjectsSub = true;
+            studentSubjects_list_test.clear();
+        } else {
+            studentSubjects_list_test.add( subjectId + 10 );
+            switch (subjectId) {
+                case 1 -> studentSubjects_list.add( DataRegistry.getSubjects().get( 5 ) );
+                case 2 -> studentSubjects_list.add( DataRegistry.getSubjects().get( 6 ) );
+                case 3 -> studentSubjects_list.add( DataRegistry.getSubjects().get( 7 ) );
+                case 4 -> studentSubjects_list.add( DataRegistry.getSubjects().get( 8 ) );
+                default -> System.out.println("지정 범위내의 값을 입력해 주세요");
+            }
+            System.out.println( studentSubjects_list_test.size() + " 번째 선택 과목 선택됨 " + DataRegistry.getSubjects().get( subjectId + 4 ).getSubjectName()+"\n");
+        }
+        if (studentSubjects_list_test.size() >= 2) {
+            System.out.print( "2개 이상입니다. 상태를 등록 하려면 '99' 을 입력해 주세요 : " );
+            System.out.println();
+        }
+        return SubjectsSub;
+    }
+
+    private static StateType studentNewStateType( int stats_set) {
+        StateType stateType = null;
+        switch (stats_set) {
+            case 1 -> stateType = StateType.RED;
+            case 2 -> stateType = StateType.YELLOW;
+            case 3 -> stateType = StateType.GREEN;
+            default -> System.out.println("지정 범위내의 값을 입력해 주세요");
+        }
+        return stateType;
+    }
 }
+
