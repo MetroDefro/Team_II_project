@@ -13,6 +13,9 @@ public class DataRegistry {
     private static final String INDEX_TYPE_SUBJECT = "SU";
     private static int scoreIndex;
     private static final String INDEX_TYPE_SCORE = "SC";
+    private static int stateIndex;
+    private static final String RED = "RED";
+
 
     // getter
     public static List<Student> getStudents() {
@@ -83,6 +86,7 @@ public class DataRegistry {
         );
         scores = new ArrayList<>();
     }
+
 
     // index 자동 증가
     public static int sequence(String type) {
