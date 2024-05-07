@@ -99,7 +99,7 @@ public class StudentManager extends Manager{
                         System.out.print("상태 수정 1, RED 2, YELLOW 3,GREEN : ");
                         String changeStateType = sc.next();
                         String test_int = "^[0-9]*$";
-                        int changeStateType_int = 0;
+                        int changeStateType_int;
                         if (changeStateType.matches(test_int)) {
                             changeStateType_int = Parser.parseId(changeStateType);
                             if (changeStateType_int <= 3) {

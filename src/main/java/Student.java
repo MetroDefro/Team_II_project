@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class Student {
-    private int  studentId ;
+    private  int  studentId ;
     private String  studentName ;
     private List<Subject> studentSubjects;
     StateType stateType;
@@ -61,7 +61,7 @@ public class Student {
             int count = 0;
             int count_sub = 0;
             System.out.println("등록할 과목을 입력해 주세요 \n 최소 3개 이상의 필수 과목, 2개 이상의 선택 과목");
-            int stats_s = 0;
+            int stats_s;
             while (true) {
 
                 if (count < 90) {
