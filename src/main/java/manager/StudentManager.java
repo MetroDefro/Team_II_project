@@ -103,7 +103,7 @@ public class StudentManager extends Manager{
                         studentFound = true;
                         break;
                     }else if (choice1 == 2) {
-                        System.out.print("상태 수정 1, RED 2, YELLOW 3,GREEN : ");
+                        System.out.print("상태입력 1.RED, 2.YELLOW, 3.GREEN : ");
                         String changeStateType = sc.next();
                         String test_int = "^[0-9]*$";
                         int changeStateType_int;
@@ -270,7 +270,7 @@ public class StudentManager extends Manager{
     private static StateType studentNewStateType() {
         int subjectId;
         subjectId =UserInputReader.getOption(3,
-                                             "\n 상태입력 1, RED 2, YELLOW 3,GREEN : ");
+                                             "\n 상태입력 1.RED, 2.YELLOW, 3.GREEN : ");
         StateType stateType = StateType.values()[subjectId - 1]; // 상태
         return stateType;
     }
