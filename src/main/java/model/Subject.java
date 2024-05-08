@@ -4,20 +4,20 @@ import enumtype.*;
 
 public class Subject {
     private int subjectId;
-    private String subjectName;
+    private SubjectName subjectName;
     private SubjectType subjectType;
 
-    public Subject(int subjectId, String subjectName, SubjectType subjectType) {
-        this.subjectId = subjectId;
+    public Subject(SubjectName subjectName) {
+        this.subjectId = subjectName.getId();
         this.subjectName = subjectName;
-        this.subjectType = subjectType;
+        this.subjectType = subjectName.getSubjectType();
     }
 
     public int getSubjectId() {
         return subjectId;
     }
 
-    public String getSubjectName() {
+    public SubjectName getSubjectName() {
         return subjectName;
     }
 
