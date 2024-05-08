@@ -101,7 +101,7 @@ public class DataRegistry {
         if(studentObj.isPresent()) {
             return studentObj.get();
         } else {
-            throw new InputMismatchException("일치하는 학생이 없습니다.\n선택 화면 이동...");
+            throw new InputMismatchException("일치하는 학생이 없습니다.");
         }
     }
 
@@ -114,7 +114,7 @@ public class DataRegistry {
         if(studentObj.isPresent()) {
             return studentObj.get();
         } else {
-            throw new InputMismatchException("일치하는 학생이 없습니다.\n선택 화면 이동...");
+            throw new InputMismatchException("일치하는 학생이 없습니다.");
         }
     }
 
@@ -126,7 +126,7 @@ public class DataRegistry {
         if(!studentList.isEmpty()) {
             return studentList;
         } else {
-            throw new InputMismatchException("일치하는 학생이 없습니다.\n선택 화면 이동...");
+            throw new InputMismatchException("일치하는 학생이 없습니다.");
         }
     }
 
@@ -139,7 +139,7 @@ public class DataRegistry {
         if(subjectObj.isPresent()) {
             return subjectObj.get();
         } else {
-            throw new InputMismatchException("일치하는 과목이 없습니다.\n선택 화면 이동...");
+            throw new InputMismatchException("일치하는 과목이 없습니다.");
         }
     }
 
@@ -152,7 +152,7 @@ public class DataRegistry {
         if(subjectObj.isPresent()) {
             return subjectObj.get();
         } else {
-            throw new InputMismatchException("일치하는 과목이 없습니다.\n선택 화면 이동...");
+            throw new InputMismatchException("일치하는 과목이 없습니다.");
         }
     }
     
@@ -166,7 +166,7 @@ public class DataRegistry {
         if(scoreObj.isPresent()) {
             return scoreObj.get();
         } else {
-            throw new InputMismatchException("일치하는 데이터가 없습니다.\n선택 화면 이동...");
+            throw new InputMismatchException("일치하는 데이터가 없습니다.");
         }
     }
 
@@ -179,7 +179,7 @@ public class DataRegistry {
         if(scoreObj.isPresent()) {
             return scoreObj.get();
         } else {
-            throw new InputMismatchException("일치하는 데이터가 없습니다.\n선택 화면 이동...");
+            throw new InputMismatchException("일치하는 데이터가 없습니다.");
         }
     }
 
@@ -194,7 +194,7 @@ public class DataRegistry {
         if(!statusMatchedStudents.isEmpty()) {
             return statusMatchedStudents;
         } else {
-            throw new InputMismatchException("일치하는 학생이 없습니다.\n선택 화면 이동...");
+            throw new InputMismatchException("일치하는 학생이 없습니다.");
         }
     }
 
@@ -209,7 +209,7 @@ public class DataRegistry {
         if(!subjectMatchedType.isEmpty()) {
             return subjectMatchedType;
         } else {
-            throw new InputMismatchException("일치하는 과목이 없습니다.\n선택화면 이동...");
+            throw new InputMismatchException("일치하는 과목이 없습니다.");
         }
     }
 
@@ -223,7 +223,7 @@ public class DataRegistry {
         if (scoreObj.isPresent()) {
             return scoreObj.get();
         } else {
-            throw new InputMismatchException("일치하는 데이터가 없습니다.\n선택 화면 이동...");
+            throw new InputMismatchException("일치하는 데이터가 없습니다.");
         }
     }
 
