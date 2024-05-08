@@ -69,7 +69,7 @@ public class StudentManager extends Manager{
             if (!found) {
                 System.out.println("해당 학생을 찾을 수 없습니다.");
             }
-            System.out.println("추가 조회를 원하시면 1 , 아니면 아무 입력을 하세요.");
+            System.out.println("추가 조회를 원하시면 1 , 아니면 아무 숫자를 하세요.");
             choice = sc.nextInt();
         } while (choice == 1);
     }
@@ -118,7 +118,7 @@ public class StudentManager extends Manager{
                 System.out.println("해당 ID를 가진 학생이 없거나, 수정하지 않았습니다.");
             }
 
-            System.out.println("추가 수정를 원하시면 1 , 아니면 아무 입력을 하세요.");
+            System.out.println("추가 수정를 원하시면 1 , 아니면 아무 숫자를 입력하세요.");
             choice = sc.nextInt();
         }while (choice == 1);
     }
@@ -144,7 +144,7 @@ public class StudentManager extends Manager{
             } else {
                 System.out.println("해당 ID를 가진 학생이 없습니다.");
             }
-            System.out.println("추가 삭제를 원하시면 1 , 아니면 아무 입력을 하세요.");
+            System.out.println("추가 삭제를 원하시면 1 , 아니면 아무 숫자를 입력하세요.");
             choice = sc.nextInt();
         }while (choice == 1);
     }
