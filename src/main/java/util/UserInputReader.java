@@ -31,6 +31,17 @@ public class UserInputReader {
         }
     }
 
+    public static int getStudentId() {
+        while (true) {
+            System.out.print("\n수강생 아이디를 입력하시오...");
+            try {
+                return Parser.parseId(sc.next());
+            } catch (InputMismatchException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
     public static SubjectName getSubjectName() throws InputMismatchException {
         while (true) {
             System.out.print("\n과목 이름을 입력하시오...");
