@@ -95,7 +95,7 @@ public class StudentManager extends Manager{
                         studentFound = true;
                         break;
                     }else if (choice1 == 2) {
-                        System.out.print("상태 수정 1. RED, 2. GREEN, 3. YELLOW : ");
+                        System.out.print("상태 수정 1. RED, 2. YELLOW, 3. GREEN : ");
                         String changeStateType = sc.next();
                         String test_int = "^[0-9]*$";
                         int changeStateType_int;
@@ -188,7 +188,7 @@ public class StudentManager extends Manager{
             while (true) {
                 if (!SubjectsMain) System.out.print("필수 과목 : 1.Java , 2.객체지향 , 3.Spring , 4.JPA , 5.MySQL  \n 입력해주세요 : ");
                 else if (!SubjectsSub) System.out.print("선택 과목 : 1.디자인 패턴 , 2.Spring Security , 3.Redis , 4.MongoDB \n 입력해주세요 :  ");
-                else System.out.print( "\n 상태입력 1. RED, 2. GREEN, 3. YELLOW : ");
+                else System.out.print( "\n 상태입력 1. RED, 2. YELLOW, 3. GREEN : ");
 
                 String subjectName = scanner.next();
                 // 문자열을 감지해 => 정수값
@@ -215,9 +215,9 @@ public class StudentManager extends Manager{
                 }
             }
 
-            System.out.print("\n 추가를 끝내시겠습니까?  끝내기 = (n) 추가 = (y) \n 입력해 주세요 : ");
+            System.out.print("\n 추가를 끝내시려면 1, 계속해서 추가하시려면 2를 눌러주세요: ");
             String next = scanner.next();
-            if (next.equals("n")) {
+            if (next.equals("1")) {
                 break;
             }
         }
