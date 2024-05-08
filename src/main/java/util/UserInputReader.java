@@ -53,11 +53,13 @@ public class UserInputReader {
         }
     }
 
-    public static String getSubjectName() throws InputMismatchException {
+    public static SubjectName getSubjectName() throws InputMismatchException {
         while (true) {
             System.out.print("\n과목 이름을 입력하시오...");
+            System.out.print("\n1. Java, 2. 객체지향, 3. Spring, 4. JPA, 5. MySQL");
+            System.out.println("\n6. 디자인 패턴, 7. Spring Security, 8. Redis, 9. MongoDB");
             try {
-                return sc.next();
+                return Parser.parseSubjectName(sc.next());
             } catch (InputMismatchException e) {
                 System.out.println(e.getMessage());
             }
@@ -89,6 +91,7 @@ public class UserInputReader {
     public static StateType getStudentState() {
         while (true) {
             System.out.print("\n상태를 입력하시오...");
+            System.out.println("\n1. RED, 2. GREEN, 3. YELLOWL");
             try {
                 return Parser.parseState(sc.next());
             } catch (InputMismatchException e) {

@@ -58,4 +58,18 @@ public class Parser {
             throw new InputMismatchException("올바른 상태를 입력하시오...(RED, GREEN, YELLOW)");
         }
     }
+
+    public static SubjectName parseSubjectName(String input) throws InputMismatchException {
+        try {
+            if(input.matches("^[0-9]+$")) { // 정규식 검사
+                if(Integer.parseInt(input) <= 9) {
+                    return SubjectName.getSubjectName(Integer.parseInt(input));
+                }
+            }
+        }
+        catch (Exception e) {
+            throw new InputMismatchException(e.getMessage());
+        }
+        throw new InputMismatchException("올바른 과목을 입력하시오...");
+    }
 }

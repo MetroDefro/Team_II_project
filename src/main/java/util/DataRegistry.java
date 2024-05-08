@@ -144,7 +144,7 @@ public class DataRegistry {
     }
 
     // 과목 이름으로 원하는 과목 찾기
-    public static Subject searchSubject(String subjectName) throws InputMismatchException{
+    public static Subject searchSubject(SubjectName subjectName) throws InputMismatchException{
         Optional<Subject> subjectObj = subjects.stream()
                 .filter(o -> o.getSubjectName().equals(subjectName))
                 .findFirst();
