@@ -13,22 +13,10 @@ public class DataRegistry {
 
     // index 관리 필드
     private static int studentIndex;
-    private static final String INDEX_TYPE_STUDENT = "ST";
-    private static int scoreIndex;
-    private static final String INDEX_TYPE_SCORE = "SC";
-
 
     // getter
     public static List<Student> getStudents() {
         return students;
-    }
-
-    public static List<Subject> getSubjects() {
-        return subjects;
-    }
-
-    public static List<Score> getScores() {
-        return scores;
     }
 
     // 초기 데이터 생성
@@ -48,44 +36,40 @@ public class DataRegistry {
         scores = new ArrayList<>();
     }
 
-
     // index 자동 증가
-    public static int sequence(String type) {
-        return switch (type) {
-            case INDEX_TYPE_STUDENT -> ++studentIndex;
-            default -> ++scoreIndex;
-        };
+    public static int sequence() {
+        return ++studentIndex;
     }
 
     public static int getStudentId() {
-        return sequence(INDEX_TYPE_STUDENT);
+        return sequence();
     }
-
-    public static int getScoreId() {
-        return sequence(INDEX_TYPE_SCORE);
-    }
-
 
     // 추가 기능
     public static void addStudent(Student student) {
         students.add(student);
     }
 
-    public static void addScore(Score score) {
-        scores.add(score);
+    // 기존 addScore 메서드 수정 : 회차별 점수 추가
+    public static void addScore(int studentId, int subjectId, int turn, int score, SubjectType subjectType) {
+        // 중복 검사
+        if(isScoreAlreadyExist(studentId,subjectId,turn)) {
+            throw new RuntimeException("이미 해당 회차에 점수가 등록되어 있습니다.");
+        }
+
+        char scoreGrade = Score.reteGrade(score, subjectType);
+        Score newScore = new Score(studentId, subjectId, turn, score, scoreGrade);
+        scores.add(newScore);
+    }
+
+    public static void addScore(int studentId, int subjectId, int totalScore, SubjectType subjectType) {
+        Score newTotalScore = new Score(studentId, subjectId, totalScore);
+        scores.add(newTotalScore);
     }
 
     // 삭제 기능
     public static void removeStudent(int studentId) {
         students.remove(searchStudent(studentId));
-    }
-
-    public static void removeStudent(String studentName) {
-        students.remove(searchStudent(studentName));
-    }
-
-    public static void removeScore(int scoreId) {
-        scores.remove(searchScore(scoreId));
     }
 
     public static void removeScore(int studentId, int subjectId, int turn) {
@@ -96,19 +80,6 @@ public class DataRegistry {
     public static Student searchStudent(int studentId) throws InputMismatchException {
         Optional<Student> studentObj = students.stream()
                 .filter(o -> o.getStudentId() == studentId)
-                .findFirst();
-        // 해당하는 데이터가 없을 경우 예외처리
-        if(studentObj.isPresent()) {
-            return studentObj.get();
-        } else {
-            throw new InputMismatchException("일치하는 학생이 없습니다.");
-        }
-    }
-
-    // 수강생 이름으로 원하는 수강생 찾기
-    public static Student searchStudent(String studentName) throws InputMismatchException{
-        Optional<Student> studentObj = students.stream()
-                .filter(o -> o.getStudentName().equals(studentName))
                 .findFirst();
         // 해당하는 데이터가 없을 경우 예외처리
         if(studentObj.isPresent()) {
@@ -170,19 +141,6 @@ public class DataRegistry {
         }
     }
 
-    // 점수Id로 원하는 점수 찾기
-    public static Score searchScore(int scoreId) throws InputMismatchException {
-        // scores 조회하여 수강생id, 과목id, 회차가 일치하는 객체 찾기
-        Optional<Score> scoreObj = scores.stream().filter(o -> o.getScoreId() == scoreId)
-                .findFirst();
-        // 해당하는 데이터가 없을 겨우 예외처리
-        if(scoreObj.isPresent()) {
-            return scoreObj.get();
-        } else {
-            throw new InputMismatchException("일치하는 데이터가 없습니다.");
-        }
-    }
-
     // 수강생 상태를 입력받아 같은 상태의 수강생들을 찾기
     public static List<Student> searchStudent(StateType status) throws InputMismatchException {
         List<Student> statusMatchedStudents = new ArrayList<>();
@@ -225,24 +183,6 @@ public class DataRegistry {
         } else {
             throw new InputMismatchException("일치하는 데이터가 없습니다.");
         }
-    }
-
-
-    // 기존 addScore 메서드 수정 : 회차별 점수 추가
-    public static void addScore(int studentId, int subjectId, int turn, int score, SubjectType subjectType) {
-        // 중복 검사
-        if(isScoreAlreadyExist(studentId,subjectId,turn)) {
-            throw new RuntimeException("이미 해당 회차에 점수가 등록되어 있습니다.");
-        }
-
-        char scoreGrade = Score.reteGrade(score, subjectType);
-        Score newScore = new Score(studentId, subjectId, turn, score, scoreGrade, subjectType);
-        scores.add(newScore);
-    }
-
-    public static void addScore(int studentId, int subjectId, int totalScore, SubjectType subjectType) {
-        Score newTotalScore = new Score(studentId, subjectId, totalScore, subjectType);
-        scores.add(newTotalScore);
     }
 
     // 중복 검사
