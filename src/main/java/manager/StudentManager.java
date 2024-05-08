@@ -93,7 +93,7 @@ public class StudentManager extends Manager{
             for (Student student : DataRegistry.getStudents()) {
                 if (student.getStudentId() == id) {
                     System.out.println("기존 이름 : " + student.getStudentName());
-                    System.out.println("기존 이름 : " + student.getStateType());
+                    System.out.println("기존 상태 : " + student.getStateType());
                     System.out.println("이름 수정을 원하면 1, 상태 수정을 원하면 2, 아니면 아무 입력을 하세요.");
                     int choice1 = sc.nextInt();
                     if (choice1 == 1) {
@@ -117,7 +117,9 @@ public class StudentManager extends Manager{
                         }
                         studentFound = true;
                         break;
-                    }else break;
+                    }else {
+                        break;
+                    }
                 }
             }
             if (studentFound) {
