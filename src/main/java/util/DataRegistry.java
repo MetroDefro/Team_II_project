@@ -2,7 +2,6 @@ package util;
 
 import enumtype.*;
 import model.*;
-import util.*;
 
 import java.util.*;
 
@@ -65,6 +64,7 @@ public class DataRegistry {
     public static int getScoreId() {
         return sequence(INDEX_TYPE_SCORE);
     }
+
 
     // 추가 기능
     public static void addStudent(Student student) {
