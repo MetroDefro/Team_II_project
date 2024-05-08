@@ -15,12 +15,8 @@ public class DataRegistry {
     // index 관리 필드
     private static int studentIndex;
     private static final String INDEX_TYPE_STUDENT = "ST";
-    private static int subjectIndex;
-    private static final String INDEX_TYPE_SUBJECT = "SU";
     private static int scoreIndex;
     private static final String INDEX_TYPE_SCORE = "SC";
-    private static int stateIndex;
-    private static final String RED = "RED";
 
 
     // getter
@@ -36,59 +32,19 @@ public class DataRegistry {
         return scores;
     }
 
-    // 임시
-    public static int getStudentIndex() { return studentIndex;}
-
-
     // 초기 데이터 생성
     public static void setInitData() {
         students = new ArrayList<>();
         subjects = List.of(
-                new Subject(
-                        sequence(INDEX_TYPE_SUBJECT),
-                        "Java",
-                        SubjectType.ESSENTIAL
-                ),
-                new Subject(
-                        sequence(INDEX_TYPE_SUBJECT),
-                        "객체지향",
-                        SubjectType.ESSENTIAL
-                ),
-                new Subject(
-                        sequence(INDEX_TYPE_SUBJECT),
-                        "Spring",
-                        SubjectType.ESSENTIAL
-                ),
-                new Subject(
-                        sequence(INDEX_TYPE_SUBJECT),
-                        "JPA",
-                        SubjectType.ESSENTIAL
-                ),
-                new Subject(
-                        sequence(INDEX_TYPE_SUBJECT),
-                        "MySQL",
-                        SubjectType.ESSENTIAL
-                ),
-                new Subject(
-                        sequence(INDEX_TYPE_SUBJECT),
-                        "디자인 패턴",
-                        SubjectType.SELECT
-                ),
-                new Subject(
-                        sequence(INDEX_TYPE_SUBJECT),
-                        "Spring Security",
-                        SubjectType.SELECT
-                ),
-                new Subject(
-                        sequence(INDEX_TYPE_SUBJECT),
-                        "Redis",
-                        SubjectType.SELECT
-                ),
-                new Subject(
-                        sequence(INDEX_TYPE_SUBJECT),
-                        "MongoDB",
-                        SubjectType.SELECT
-                )
+                new Subject(SubjectName.Java),
+                new Subject(SubjectName.OOP),
+                new Subject(SubjectName.Spring),
+                new Subject(SubjectName.JPA),
+                new Subject(SubjectName.MySQL),
+                new Subject(SubjectName.DesignPattern),
+                new Subject(SubjectName.SpringSecurity),
+                new Subject(SubjectName.Redis),
+                new Subject(SubjectName.MongoDB)
         );
         scores = new ArrayList<>();
     }
@@ -98,7 +54,6 @@ public class DataRegistry {
     public static int sequence(String type) {
         return switch (type) {
             case INDEX_TYPE_STUDENT -> ++studentIndex;
-            case INDEX_TYPE_SUBJECT -> ++subjectIndex;
             default -> ++scoreIndex;
         };
     }
