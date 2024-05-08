@@ -1,5 +1,6 @@
 package manager;
 
+import data.*;
 import enumtype.*;
 import model.*;
 import util.*;

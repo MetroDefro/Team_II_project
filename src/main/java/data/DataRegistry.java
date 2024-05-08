@@ -1,4 +1,4 @@
-package util;
+package data;
 
 import enumtype.*;
 import model.*;
