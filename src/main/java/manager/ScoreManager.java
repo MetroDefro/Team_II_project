@@ -45,13 +45,15 @@ public class ScoreManager extends Manager {
         for (int scoreTurn = 1; scoreTurn <= 10; scoreTurn++) {
             System.out.print(scoreTurn + " 회차 ");
             int inputScore = UserInputReader.getScore(); // 점수 입력
-            totalScore += inputScore;
+            int tempTotalScore = totalScore + inputScore;
             try {
                 DataRegistry.addScore(studentIdInput.getStudentId(), subjectInput.getSubjectId(), scoreTurn
                         , inputScore, subjectInput.getSubjectType());
+                totalScore = tempTotalScore;
             } catch (RuntimeException e) {
                 System.out.println(e.getMessage()); // 예외 메시지 출력
-                break; // 반복문 종료
+                System.out.println("다시 해당 회차의 점수를 입력하세요.");
+                scoreTurn--; // 이전 회차값으로 돌리게 되면 다시 for문으로 돌아갈 경우 +1 값인 현재 회차
             }
         }
         // 총 점수
