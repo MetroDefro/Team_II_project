@@ -73,4 +73,22 @@ public enum SubjectName {
     public int getId() {
         return ordinal() + 1;
     }
+
+    public static SubjectName getSubjectName(int id) {
+        for (SubjectName type : SubjectName.values()) {
+            if(type.getId() == id) {
+                return type;
+            }
+        }
+        throw new IllegalArgumentException("해당하는 과목이 없습니다. ID: " + id); // 일치하는 게 없으면 예외처리
+    }
+
+    public static SubjectName getSubjectName(String input) {
+        for (SubjectName type : SubjectName.values()) {
+            if(type.name.equals(input)) {
+                return type;
+            }
+        }
+        throw new IllegalArgumentException("해당하는 과목이 없습니다. 이름: " + input); // 일치하는 게 없으면 예외처리
+    }
 }
