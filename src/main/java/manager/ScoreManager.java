@@ -64,22 +64,20 @@ public class ScoreManager extends Manager {
     private void updateTurnScoreBySubject() {
         do {
             try {
-                // 기능 구현 (수정할 특정 학생, 과목 및 회차, 점수 입력 받아 변환)
-                Student studentIdInput = DataRegistry.searchStudent(UserInputReader.getStudentId());
-                Subject subjectInput = DataRegistry.searchSubject(UserInputReader.getSubjectName());
-                int turnInput = UserInputReader.getTurn();
-                Score score = DataRegistry.searchScore(studentIdInput.getStudentId(), subjectInput.getSubjectId(), turnInput); // 점수 조회
-
-                patchScore(UserInputReader.getScore(), score, subjectInput);
+                // 기능 구현 (수정할 특정 학생, 과목 및 회차, 점수 입력 받아 해당하는 점수 서치)
+                patchScore(DataRegistry.searchScore(UserInputReader.getStudentId(),
+                                UserInputReader.getSubjectName().getId(),
+                                UserInputReader.getTurn()),
+                        UserInputReader.getScore());
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
         } while (UserInputReader.getOption(2,"계속 수정하시겠습니까?\n1. 네 2. 아니오") == 1);
     }
 
-    private void patchScore(int newScore, Score score, Subject subject) {
+    private void patchScore(Score score, int newScore) {
         System.out.println("\n시험 점수를 수정합니다...");
-        score.patchScore(newScore, subject.getSubjectType()); // 시험 점수 업데이트
+        score.patchScore(newScore); // 시험 점수 업데이트
         System.out.println("\n점수 수정 성공!");
     }
 

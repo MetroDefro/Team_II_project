@@ -66,9 +66,9 @@ public class Score {
     }
 
 
-    public void patchScore(int score, SubjectType subjectType) {
+    public void patchScore(int score) {
         this.score = score;
-        this.scoreGrade = reteGrade(score, subjectType); // 등급 매기기
+        this.scoreGrade = reteGrade(score, SubjectName.getSubjectName(subjectId).getSubjectType()); // 등급 매기기
     }
 
     public static char reteGrade(int score, SubjectType subjectType) {
