@@ -31,10 +31,6 @@ public class DataRegistry {
         return scores;
     }
 
-    // 임시
-    public static int getStudentIndex() { return studentIndex;}
-
-
     // 초기 데이터 생성
     public static void setInitData() {
         students = new ArrayList<>();
