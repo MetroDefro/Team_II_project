@@ -1,3 +1,7 @@
+package util;
+
+import enumtype.*;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 

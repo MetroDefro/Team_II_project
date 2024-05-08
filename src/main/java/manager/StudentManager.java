@@ -1,3 +1,9 @@
+package manager;
+
+import enumtype.*;
+import model.*;
+import util.*;
+
 import java.util.*;
 
 public class StudentManager extends Manager{
@@ -196,7 +202,7 @@ public class StudentManager extends Manager{
                     // 상태
                     StateType stateType = studentNewStateType(subjectId);
                     // 생성 완료
-                    DataRegistry.addStudent( new Student(studentId ,studentName, studentSubjects_list,stateType));
+                    DataRegistry.addStudent( new Student(studentId ,studentName, studentSubjects_list, stateType));
                     break;
                 }else {
                     System.out.println("지정 범위내의 값을 입력해 주세요");
@@ -265,7 +271,7 @@ public class StudentManager extends Manager{
         return SubjectsSub;
     }
 
-    private StateType studentNewStateType( int stats_set) {
+    private StateType studentNewStateType(int stats_set) {
         StateType stateType = null;
         switch (stats_set) {
             case 1 -> stateType = StateType.RED;

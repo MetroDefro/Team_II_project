@@ -1,5 +1,10 @@
+package manager;
+
+import enumtype.*;
+import model.*;
+import util.*;
+
 import java.util.Arrays;
-import java.util.InputMismatchException;
 
 public class ScoreManager extends Manager {
     @Override
@@ -64,7 +69,7 @@ public class ScoreManager extends Manager {
         Score score = DataRegistry.searchScore(studentIdInput.getStudentId(), subjectInput.getSubjectId(), turnInput);
         System.out.println("시험 점수를 수정합니다...");
         // 해당하는 점수 객체의 점수를 변경한다.
-        score.patchScore(scoreInput, subjectInput.subjectType); // 시험 점수 업데이트
+        score.patchScore(scoreInput, subjectInput.getSubjectType()); // 시험 점수 업데이트
         System.out.println("\n점수 수정 성공!");
     }
 

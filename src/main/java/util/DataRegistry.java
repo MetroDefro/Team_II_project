@@ -1,5 +1,10 @@
+package util;
+
+import enumtype.*;
+import model.*;
+import util.*;
+
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class DataRegistry {
     // 데이터 저장소
