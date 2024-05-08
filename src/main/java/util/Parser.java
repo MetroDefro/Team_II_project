@@ -53,10 +53,15 @@ public class Parser {
 
     public static StateType parseState(String input) throws InputMismatchException {
         try {
-            return StateType.valueOf(input);
+            if(input.matches("^[0-9]+$")) { // 정규식 검사
+                if(Integer.parseInt(input) <= 3) {
+                    return StateType.getStateType(Integer.parseInt(input));
+                }
+            }
         } catch (Exception e) {
-            throw new InputMismatchException("올바른 상태를 입력하시오...(RED, GREEN, YELLOW)");
+            throw new InputMismatchException(e.getMessage());
         }
+        throw new InputMismatchException("올바른 번호를 입력하시오...");
     }
 
     public static SubjectName parseSubjectName(String input) throws InputMismatchException {

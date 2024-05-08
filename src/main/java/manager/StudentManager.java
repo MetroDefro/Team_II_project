@@ -151,12 +151,18 @@ public class StudentManager extends Manager{
 
     // 상태별 수강생 목록 조회
     public void searchStudentByState() {
-        List<Student> studentList = DataRegistry.searchStudentList(UserInputReader.getStudentState());
-        for (Student student : studentList) {
-            System.out.println("\n학생 ID: " + student.getStudentId());
-            System.out.println("학생 이름: " + student.getStudentName());
-            System.out.println();
-        }
+        do {
+            try {
+                List<Student> studentList = DataRegistry.searchStudentList(UserInputReader.getStudentState());
+                for (Student student : studentList) {
+                    System.out.println("\n학생 ID: " + student.getStudentId());
+                    System.out.println("학생 이름: " + student.getStudentName());
+                    System.out.println();
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        } while (UserInputReader.getOption(2,"계속 조회하시겠습니까?\n1. 네 2. 아니오") == 1);
     }
 
     // 수강생 생성
