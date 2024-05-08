@@ -34,7 +34,7 @@ public class StudentManager extends Manager{
     }
 
     // 수강생 목록 조회
-    public static void searchAllStudent(){
+    public void searchAllStudent(){
         Scanner sc = new Scanner(System.in);
         System.out.println();
         for (Student student : DataRegistry.getStudents()) {
@@ -47,7 +47,7 @@ public class StudentManager extends Manager{
     }
 
     // 수강생 정보 조회
-    public static void searchStudentById() {
+    public void searchStudentById() {
         System.out.println();
         int choice;
         do {
@@ -75,7 +75,7 @@ public class StudentManager extends Manager{
     }
 
     // 수강생 정보 수정
-    public static void changeStudent(){
+    public void changeStudent(){
         int choice;
         do {
             System.out.print("수정할 학생 ID: ");
@@ -124,7 +124,7 @@ public class StudentManager extends Manager{
     }
 
     // 수강생 삭제
-    public static void removeStudent() {
+    public void removeStudent() {
         Scanner sc = new Scanner(System.in);
         int choice;
         do {
@@ -150,7 +150,7 @@ public class StudentManager extends Manager{
     }
 
     // 상태별 수강생 목록 조회
-    public static void searchStudentByState() {
+    public void searchStudentByState() {
         List<Student> studentList = DataRegistry.searchStudentList(UserInputReader.getStudentState());
         for (Student student : studentList) {
             System.out.println("\n학생 ID: " + student.getStudentId());
@@ -160,7 +160,7 @@ public class StudentManager extends Manager{
     }
 
     // 수강생 생성
-    public static void studentNew() {
+    public void studentNew() {
         while (true){
             Scanner scanner = new Scanner(System.in);
 
@@ -218,7 +218,7 @@ public class StudentManager extends Manager{
     }
 
     // 매인 수업
-    private static boolean studentNewSubjectsMain(Set<Integer> studentSubjects_list_test, int subjectId, List<Subject> studentSubjects_list) {
+    private boolean studentNewSubjectsMain(Set<Integer> studentSubjects_list_test, int subjectId, List<Subject> studentSubjects_list) {
         boolean SubjectsMain = false;
         if (studentSubjects_list_test.contains( subjectId )) {
             System.out.println(" 이미 등록하신 과목입니다.");
@@ -245,7 +245,7 @@ public class StudentManager extends Manager{
         return SubjectsMain;
     }
     // 서브 수업
-    private static boolean studentNewSubjectsSub(Set<Integer> studentSubjects_list_test, int subjectId, List<Subject> studentSubjects_list) {
+    private boolean studentNewSubjectsSub(Set<Integer> studentSubjects_list_test, int subjectId, List<Subject> studentSubjects_list) {
 
         boolean SubjectsSub = false;
         if (studentSubjects_list_test.contains( subjectId + 10 )) {
@@ -271,7 +271,7 @@ public class StudentManager extends Manager{
         return SubjectsSub;
     }
 
-    private static StateType studentNewStateType( int stats_set) {
+    private StateType studentNewStateType( int stats_set) {
         StateType stateType = null;
         switch (stats_set) {
             case 1 -> stateType = StateType.RED;

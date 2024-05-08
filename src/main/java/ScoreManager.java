@@ -33,7 +33,7 @@ public class ScoreManager extends Manager {
     }
 
     // 수강생의 과목별 시험 회차 및 점수 등록
-    private static void createScore() {
+    private void createScore() {
         Student studentIdInput = DataRegistry.searchStudent(UserInputReader.getStudentId());
         for(Subject subject : studentIdInput.getStudentSubjects()) {
             System.out.print(subject.getSubjectName() + " ") ;
@@ -60,7 +60,7 @@ public class ScoreManager extends Manager {
     }
 
     // 수강생의 과목별 회차 점수 수정
-    private static void updateTurnScoreBySubject() {
+    private void updateTurnScoreBySubject() {
         // 기능 구현 (수정할 특정 학생, 과목 및 회차, 점수 입력 받아 변환)
         Student studentIdInput = DataRegistry.searchStudent(UserInputReader.getStudentId());
         Subject subjectInput = DataRegistry.searchSubject(UserInputReader.getSubjectName());
@@ -75,7 +75,7 @@ public class ScoreManager extends Manager {
     }
 
     /* 수강생의 특정 과목 회차별 등급 조회 */
-    private static void inquiryScoreGrade() {
+    private void inquiryScoreGrade() {
         //입력받기
         Student studentIdInput = DataRegistry.searchStudent(UserInputReader.getStudentId()); //수강생 ID
         Subject subjectInput = DataRegistry.searchSubject(UserInputReader.getSubjectName()); //과목 이름
@@ -88,7 +88,7 @@ public class ScoreManager extends Manager {
     }
 
     /* 수강생의 과목별 평균 등급 조회 */
-    private static void averageOfScoreGrade() {
+    private void averageOfScoreGrade() {
         //입력받기
         Student studentIdInput = DataRegistry.searchStudent(UserInputReader.getStudentId()); //수강생 ID
         Subject subjectInput = DataRegistry.searchSubject(UserInputReader.getSubjectName()); //과목 이름
@@ -106,7 +106,7 @@ public class ScoreManager extends Manager {
     }
 
     // 특정 상태 수강생들의 필수 과목 평균 등급 조회
-    private static void inquiryEssentialSubjectAvgGrade() {
+    private void inquiryEssentialSubjectAvgGrade() {
         StateType inputStudentStatus = UserInputReader.getStudentState();
 
         // 1-1. 상태에 따른 학생들을 먼저 조회한 뒤 해당 학생들의 과목에서 추려야 함
