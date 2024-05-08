@@ -85,7 +85,7 @@ public class StudentManager extends Manager{
             for (Student student : DataRegistry.getStudents()) {
                 if (student.getStudentId() == id) {
                     System.out.println("기존 이름 : " + student.getStudentName());
-                    System.out.println("기존 이름 : " + student.getStateType());
+                    System.out.println("기존 상태 : " + student.getStateType());
                     System.out.println("이름 수정을 원하면 1, 상태 수정을 원하면 2, 아니면 아무 입력을 하세요.");
                     int choice1 = sc.nextInt();
                     if (choice1 == 1) {
@@ -95,7 +95,7 @@ public class StudentManager extends Manager{
                         studentFound = true;
                         break;
                     }else if (choice1 == 2) {
-                        System.out.print("상태 수정 1, RED 2, YELLOW 3,GREEN : ");
+                        System.out.print("상태 수정 1. RED, 2. GREEN, 3. YELLOW : ");
                         String changeStateType = sc.next();
                         String test_int = "^[0-9]*$";
                         int changeStateType_int;
@@ -188,7 +188,7 @@ public class StudentManager extends Manager{
             while (true) {
                 if (!SubjectsMain) System.out.print("필수 과목 : 1.Java , 2.객체지향 , 3.Spring , 4.JPA , 5.MySQL  \n 입력해주세요 : ");
                 else if (!SubjectsSub) System.out.print("선택 과목 : 1.디자인 패턴 , 2.Spring Security , 3.Redis , 4.MongoDB \n 입력해주세요 :  ");
-                else System.out.print( "\n 상태입력 1, RED 2, YELLOW 3,GREEN : ");
+                else System.out.print( "\n 상태입력 1. RED, 2. GREEN, 3. YELLOW : ");
 
                 String subjectName = scanner.next();
                 // 문자열을 감지해 => 정수값
