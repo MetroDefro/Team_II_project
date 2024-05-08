@@ -57,7 +57,7 @@ public class StudentManager extends Manager{
     // 수강생 정보 조회
     public static void searchStudentById() {
         System.out.println();
-        int choice;
+        String choice;
         do {
             System.out.print("조회할 학생 ID : ");
             Scanner sc = new Scanner(System.in);
@@ -78,13 +78,13 @@ public class StudentManager extends Manager{
                 System.out.println("해당 학생을 찾을 수 없습니다.");
             }
             System.out.println("추가 조회를 원하시면 1 , 아니면 아무 입력을 하세요.");
-            choice = sc.nextInt();
-        } while (choice == 1);
+            choice = sc.next();
+        } while (choice.equals("1"));
     }
 
     // 수강생 정보 수정
     public static void changeStudent(){
-        int choice;
+        String choice;
         do {
             System.out.print("수정할 학생 ID: ");
             Scanner sc = new Scanner(System.in);
@@ -127,14 +127,14 @@ public class StudentManager extends Manager{
             }
 
             System.out.println("추가 수정를 원하시면 1 , 아니면 아무 입력을 하세요.");
-            choice = sc.nextInt();
-        }while (choice == 1);
+            choice = sc.next();
+        }while (choice.equals("1"));
     }
 
     // 수강생 삭제
     public static void removeStudent() {
         Scanner sc = new Scanner(System.in);
-        int choice;
+        String choice;
         do {
             System.out.print("삭제할 학생 ID: ");
             int id = sc.nextInt();
@@ -153,8 +153,8 @@ public class StudentManager extends Manager{
                 System.out.println("해당 ID를 가진 학생이 없습니다.");
             }
             System.out.println("추가 삭제를 원하시면 1 , 아니면 아무 입력을 하세요.");
-            choice = sc.nextInt();
-        }while (choice == 1);
+            choice = sc.next();
+        }while (choice.equals("1"));
     }
 
     // 상태별 수강생 목록 조회
