@@ -11,7 +11,7 @@ public class Parser {
             }
         }
         // if문에서 걸러져 나왔을 경우
-        throw new InputMismatchException("잘못된 입력입니다.\n되돌아갑니다!"); // exception 만들어 던짐
+        throw new InputMismatchException("잘못된 입력입니다."); // exception 만들어 던짐
     }
 
     // String을 int로 변환. 올바른Id(0 이상 정수)가 들어오지 않을 시 예외처리
