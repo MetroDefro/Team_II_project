@@ -33,6 +33,11 @@ public class ScoreManager extends Manager {
 
     // 수강생의 과목별 시험 회차 및 점수 등록
     private void createScore() {
+        for (Student student : DataRegistry.getStudents()) {
+            System.out.println("\n학생 ID: " + student.getStudentId());
+            System.out.println("학생 이름: " + student.getStudentName());
+            System.out.println();
+        }
         Student studentIdInput = DataRegistry.searchStudent(UserInputReader.getStudentId());
         for(Subject subject : studentIdInput.getStudentSubjects()) {
             System.out.print(subject.getSubjectName() + " ") ;
@@ -118,20 +123,27 @@ public class ScoreManager extends Manager {
 
         // 1-1. 상태에 따른 학생들을 먼저 조회한 뒤 해당 학생들의 과목에서 추려야 함
         for (Student studentInput : DataRegistry.searchStudent(inputStudentStatus)) {
-            int totalScore = 0;
-            // 1-2. 학생들의 과목에서 과목 타입으로 필수 과목 가져오기 (과목 여러개)
+            boolean hasScore = false; // 해당 학생의 성적이 있는지 여부를 체크하는 변수
             for (Subject subject : studentInput.getStudentSubjects()) {
-                if (DataRegistry.searchSubject(SubjectType.ESSENTIAL).contains(subject)) {
-                    Score score = DataRegistry.searchTotalScore(studentInput.getStudentId(), subject.getSubjectId());
-                    // 2. 각 과목을 통해 평균 조회
-                    int avgScore = score.getTotalScore() / 10;
-                    char avgGrade = Score.reteGrade(avgScore, SubjectType.ESSENTIAL);
-                    System.out.println("이름 : " + studentInput.getStudentName());
-                    System.out.println("과목 : " + subject.getSubjectName());
-                    System.out.println("총점 : " + score.getTotalScore());
-                    System.out.println("평균 등급 : " + avgGrade);
-                    System.out.println("=============================================");
+                try {
+                    if (DataRegistry.searchSubject(SubjectType.ESSENTIAL).contains(subject)) {
+                        Score score = DataRegistry.searchTotalScore(studentInput.getStudentId(), subject.getSubjectId());
+                        // 2. 각 과목을 통해 평균 조회
+                        int avgScore = score.getTotalScore() / 10;
+                        char avgGrade = Score.reteGrade(avgScore, SubjectType.ESSENTIAL);
+                        System.out.println("이름 : " + studentInput.getStudentName());
+                        System.out.println("과목 : " + subject.getSubjectName());
+                        System.out.println("총점 : " + score.getTotalScore());
+                        System.out.println("평균 등급 : " + avgGrade);
+                        System.out.println("==================================");
+                        hasScore = true; // 성적이 있음을 표시
+                    }
+                } catch (RuntimeException e) {
+                    // 해당 과목의 성적이 없는 경우 예외 처리
                 }
+            }
+            if (!hasScore) {
+                System.out.println(studentInput.getStudentName() + " 학생의 성적이 없는 과목이 있습니다.");
             }
         }
     }
