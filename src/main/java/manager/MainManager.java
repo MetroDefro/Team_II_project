@@ -1,3 +1,7 @@
+package manager;
+
+import util.UserInputReader;
+
 public class MainManager extends Manager{
 
     private final StudentManager studentManager;

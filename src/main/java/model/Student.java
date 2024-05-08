@@ -1,3 +1,7 @@
+package model;
+
+import enumtype.*;
+
 import java.util.*;
 
 public class Student {

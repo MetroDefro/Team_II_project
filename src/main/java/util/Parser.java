@@ -1,3 +1,7 @@
+package util;
+
+import enumtype.*;
+
 import java.util.InputMismatchException;
 
 // 입력 값의 예외 처리 및 파싱을 담당하는 클래스
