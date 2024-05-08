@@ -15,19 +15,13 @@ public class ScoreManager extends Manager {
             System.out.println("5. 특정 상태 수강생들의 필수 과목 평균 등급 조회");
             System.out.println("6. 메인 화면 이동");
 
-            try {
-                int input = UserInputReader.getOption(6);
-                switch (input) {
-                    case 1 -> createScore(); // 수강생의 과목별 시험 회차 및 점수 등록
-                    case 2 -> updateTurnScoreBySubject(); // 수강생의 과목별 회차 점수 수정
-                    case 3 -> inquiryScoreGrade(); // 수강생의 특정 과목 회차별 등급 조회
-                    case 4 -> averageOfScoreGrade(); // 수강생의 과목별 평균 등급 조회
-                    case 5 -> inquiryEssentialSubjectAvgGrade(); // 특정 상태 수강생들의 필수 과목 평균 등급 조회
-                    case 6 -> flag = false; // 메인 화면 이동
-                }
-            } catch (InputMismatchException e) {
-                System.out.println(e.getMessage());
-                flag = false;
+            switch (UserInputReader.getOption(6)) {
+                case 1 -> createScore(); // 수강생의 과목별 시험 회차 및 점수 등록
+                case 2 -> updateTurnScoreBySubject(); // 수강생의 과목별 회차 점수 수정
+                case 3 -> inquiryScoreGrade(); // 수강생의 특정 과목 회차별 등급 조회
+                case 4 -> averageOfScoreGrade(); // 수강생의 과목별 평균 등급 조회
+                case 5 -> inquiryEssentialSubjectAvgGrade(); // 특정 상태 수강생들의 필수 과목 평균 등급 조회
+                case 6 -> flag = false; // 메인 화면 이동
             }
         }
     }

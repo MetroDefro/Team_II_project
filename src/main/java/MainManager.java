@@ -17,16 +17,11 @@ public class MainManager extends Manager{
             System.out.println("1. 수강생 관리");
             System.out.println("2. 점수 관리");
             System.out.println("3. 프로그램 종료");
-            try {
-                int input = UserInputReader.getOption(3);
-                switch (input) {
-                    case 1 -> studentManager.displayView(); // 수강생 관리
-                    case 2 -> scoreManager.displayView(); // 점수 관리
-                    case 3 -> flag = false; // 프로그램 종료
-                }
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-                flag = false;
+
+            switch (UserInputReader.getOption(3)) {
+                case 1 -> studentManager.displayView(); // 수강생 관리
+                case 2 -> scoreManager.displayView(); // 점수 관리
+                case 3 -> flag = false; // 프로그램 종료
             }
         }
         System.out.println("프로그램을 종료합니다.");
