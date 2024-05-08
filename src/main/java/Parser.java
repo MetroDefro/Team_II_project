@@ -48,11 +48,10 @@ public class Parser {
     }
 
     public static StateType parseState(String input) throws InputMismatchException {
-        return switch (input) {
-            case "RED" -> StateType.RED;
-            case "GREEN" -> StateType.GREEN;
-            case "YELLOW" ->StateType.YELLOW;
-            default -> throw new InputMismatchException("올바른 상태를 입력하시오...(RED, GREEN, YELLOW)"); // exception 만들어 던짐
-        };
+        try {
+            return StateType.valueOf(input);
+        } catch (Exception e) {
+            throw new InputMismatchException("올바른 상태를 입력하시오...(RED, GREEN, YELLOW)");
+        }
     }
 }
