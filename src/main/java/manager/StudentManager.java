@@ -89,7 +89,8 @@ public class StudentManager extends Manager{
             System.out.print("수정할 학생 ID: ");
             Scanner sc = new Scanner(System.in);
             int id = sc.nextInt();
-            boolean studentFound = false;
+            boolean studentFoundName = false;
+            boolean studentFoundStateType = false;
             for (Student student : DataRegistry.getStudents()) {
                 if (student.getStudentId() == id) {
                     System.out.println("기존 이름 : " + student.getStudentName());
@@ -100,30 +101,22 @@ public class StudentManager extends Manager{
                         System.out.print("수정할 이름 :");
                         String newName = sc.next();
                         student.setStudentName(newName);
-                        studentFound = true;
+                        studentFoundName = true;
                         break;
                     }else if (choice1 == 2) {
-                        System.out.print("상태입력 1.RED, 2.YELLOW, 3.GREEN : ");
-                        String changeStateType = sc.next();
-                        String test_int = "^[0-9]*$";
-                        int changeStateType_int;
-                        if (changeStateType.matches(test_int)) {
-                            changeStateType_int = Parser.parseId(changeStateType);
-                            if (changeStateType_int <= 3) {
-                                student.setStateType(changeStateType_int);
-                            }else{
-                                System.out.println("1부터 3까지중 선택해 주세요");
-                            }
-                        }
-                        studentFound = true;
+                        StateType changeStateType =  studentNewStateType();
+                        student.setStateType(changeStateType);
+                        studentFoundStateType = true;
                         break;
                     }else {
                         break;
                     }
                 }
             }
-            if (studentFound) {
+            if (studentFoundName) {
                 System.out.println("이름이 수정되었습니다.");
+            } else if (studentFoundStateType) {
+                System.out.println("상태가 수정되었습니다.");
             } else {
                 System.out.println("해당 ID를 가진 학생이 없거나, 수정하지 않았습니다.");
             }

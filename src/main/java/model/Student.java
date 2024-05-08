@@ -32,13 +32,8 @@ public class Student {
 
     public StateType getStateType() {return stateType;}
 
-    public StateType setStateType(int stateType) {
-         return switch (stateType) {
-            case 1 -> this.stateType = StateType.RED;
-            case 2 -> this.stateType = StateType.YELLOW;
-            case 3 -> this.stateType = StateType.GREEN;
-            default -> getStateType();
-        };
+    public void setStateType(StateType instateType) {
+        this.stateType = instateType;
     }
 
     public String setStudentName(String studentName) {
