@@ -57,7 +57,7 @@ public class DataRegistry {
         scores.add(newScore);
     }
 
-    public static void addScore(int studentId, int subjectId, int totalScore, SubjectType subjectType) {
+    public static void addScore(int studentId, int subjectId, int totalScore) {
         Score newTotalScore = new Score(studentId, subjectId, totalScore);
         scores.add(newTotalScore);
     }

@@ -2,8 +2,6 @@ package model;
 
 import enumtype.*;
 
-import java.util.List;
-
 public class Score {
     private final int studentId;
     private final int subjectId;

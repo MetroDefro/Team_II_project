@@ -63,7 +63,7 @@ public class ScoreManager extends Manager {
             }
         }
         // 총 점수
-        DataRegistry.addScore(studentIdInput.getStudentId(),subjectInput.getSubjectId(),totalScore, subjectInput.getSubjectType());
+        DataRegistry.addScore(studentIdInput.getStudentId(),subjectInput.getSubjectId(),totalScore);
     }
 
     // 수강생의 과목별 회차 점수 수정
