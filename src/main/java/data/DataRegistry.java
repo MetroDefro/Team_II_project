@@ -19,6 +19,11 @@ public class DataRegistry {
         return students;
     }
 
+    public static List<Score> getScores() {
+        return scores;
+    }
+
+
     // 초기 데이터 생성
     public static void setInitData() {
         students = new ArrayList<>();
@@ -69,6 +74,17 @@ public class DataRegistry {
 
     public static void removeScore(int studentId, int subjectId, int turn) {
         scores.remove(searchScore(studentId, subjectId, turn));
+    }
+
+    // 수강생 id 입력시 점수 삭제
+    public static void removeStudentScores(int studentId) {
+        Iterator<Score> iterator = DataRegistry.getScores().iterator();
+        while (iterator.hasNext()) {
+            Score score = iterator.next();
+            if (score.getStudentId() == studentId) {
+                iterator.remove(); // 해당 학생의 점수 삭제
+            }
+        }
     }
 
     // 수강생 Id로 원하는 수강생 찾기
