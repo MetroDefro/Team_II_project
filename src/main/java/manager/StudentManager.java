@@ -199,7 +199,7 @@ public class StudentManager extends Manager{
             // 학생 생성
             DataRegistry.addStudent(new Student(DataRegistry.getStudentId() ,studentName, studentSubjects, stateType));
 
-        } while (!UserInputReader.getString("\n 추가를 끝내시려면(n), 아니면 아무 키를 입력해주세요 : ")
+        } while (!UserInputReader.getString("\n 추가를 끝내시려면(n), 계속 하시려면 아무 키를 입력해주세요 : ")
                 .equals("n"));
     }
 

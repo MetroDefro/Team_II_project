@@ -78,7 +78,7 @@ public class ScoreManager extends Manager {
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
-        } while (UserInputReader.getOption(2,"계속 수정하시겠습니까?\n1. 네 2. 아니오") == 1);
+        } while (UserInputReader.getOption(2,"계속 수정하시겠습니까?\n1. 네 2. 아니오 : ") == 1);
     }
 
     private void patchScore(Score score, int newScore) {
