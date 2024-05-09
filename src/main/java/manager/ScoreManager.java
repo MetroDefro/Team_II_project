@@ -78,7 +78,7 @@ public class ScoreManager extends Manager {
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
-        } while (UserInputReader.getOption(2,"계속 수정하시겠습니까?\n1. 네 2. 아니오") == 1);
+        } while (UserInputReader.getOption(2,"계속 수정하시겠습니까?\n1. 네 2. 아니오 : ") == 1);
     }
 
     private void patchScore(Score score, int newScore) {
@@ -89,33 +89,37 @@ public class ScoreManager extends Manager {
 
     /* 수강생의 특정 과목 회차별 등급 조회 */
     private void inquiryScoreGrade() {
-        //입력받기
-        Student studentIdInput = DataRegistry.searchStudent(UserInputReader.getStudentId()); //수강생 ID
-        Subject subjectInput = DataRegistry.searchSubject(UserInputReader.getSubjectName()); //과목 이름
-        int turnInput = UserInputReader.getTurn(); //회차
-        Score score = DataRegistry.searchScore(studentIdInput.getStudentId(), subjectInput.getSubjectId(), turnInput); //점수 조회
+        do {
+            //입력받기
+            Student studentIdInput = DataRegistry.searchStudent(UserInputReader.getStudentId()); //수강생 ID
+            Subject subjectInput = DataRegistry.searchSubject(UserInputReader.getSubjectName()); //과목 이름
+            int turnInput = UserInputReader.getTurn(); //회차
+            Score score = DataRegistry.searchScore(studentIdInput.getStudentId(), subjectInput.getSubjectId(), turnInput); //점수 조회
 
-        System.out.println("[" + subjectInput.getSubjectName() + "]과목의 " + turnInput + "회차 등급을 조회합니다...");
-        char grade = score.getScoreGrade();
-        System.out.println("등급: " + grade);
+            System.out.println("[" + subjectInput.getSubjectName() + "]과목의 " + turnInput + "회차 등급을 조회합니다...");
+            char grade = score.getScoreGrade();
+            System.out.println("등급: " + grade);
+        } while (UserInputReader.getOption(2,"계속 조회하시겠습니까?\n1. 네 2. 아니오 : ") == 1);
     }
 
     /* 수강생의 과목별 평균 등급 조회 */
     private void averageOfScoreGrade() {
-        //입력받기
-        Student studentIdInput = DataRegistry.searchStudent(UserInputReader.getStudentId()); //수강생 ID
-        Subject subjectInput = DataRegistry.searchSubject(UserInputReader.getSubjectName()); //과목 이름
-        //10회차 모든 점수를 배열에 저장
-        int[] scores = new int[10];
-        for (int scoreTurn = 1; scoreTurn <= 10; scoreTurn++) {
-            Score score = DataRegistry.searchScore(studentIdInput.getStudentId(), subjectInput.getSubjectId(), scoreTurn); //점수 조회
-            scores[scoreTurn - 1] = score.getScore();
-        }
-        //모든 점수의 평균
-        double averageOfScore = Arrays.stream(scores).average().orElse(0);
-        //평균 점수의 등급 구하기
-        char aveGrade = Score.reteGrade((int) averageOfScore, subjectInput.getSubjectType());
-        System.out.println("[" + subjectInput.getSubjectName() + "]과목의 평균 등급은 " + aveGrade);
+        do {
+            //입력받기
+            Student studentIdInput = DataRegistry.searchStudent(UserInputReader.getStudentId()); //수강생 ID
+            Subject subjectInput = DataRegistry.searchSubject(UserInputReader.getSubjectName()); //과목 이름
+            //10회차 모든 점수를 배열에 저장
+            int[] scores = new int[10];
+            for (int scoreTurn = 1; scoreTurn <= 10; scoreTurn++) {
+                Score score = DataRegistry.searchScore(studentIdInput.getStudentId(), subjectInput.getSubjectId(), scoreTurn); //점수 조회
+                scores[scoreTurn - 1] = score.getScore();
+            }
+            //모든 점수의 평균
+            double averageOfScore = Arrays.stream(scores).average().orElse(0);
+            //평균 점수의 등급 구하기
+            char aveGrade = Score.reteGrade((int) averageOfScore, subjectInput.getSubjectType());
+            System.out.println("[" + subjectInput.getSubjectName() + "]과목의 평균 등급은 " + aveGrade);
+        } while (UserInputReader.getOption(2,"계속 조회하시겠습니까?\n1. 네 2. 아니오 : ") == 1);
     }
 
     // 특정 상태 수강생들의 필수 과목 평균 등급 조회
