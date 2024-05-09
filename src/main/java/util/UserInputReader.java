@@ -80,7 +80,7 @@ public class UserInputReader {
     public static StateType getStudentState() {
         while (true) {
             System.out.print("\n상태를 입력하시오...");
-            System.out.println("\n1. RED, 2. GREEN, 3. YELLOW");
+            System.out.println("\n1. RED, 2. YELLOW, 3. GREEN");
             try {
                 return Parser.parseState(sc.next());
             } catch (InputMismatchException e) {
