@@ -36,13 +36,8 @@ public class DataRegistry {
         scores = new ArrayList<>();
     }
 
-    // index 자동 증가
-    public static int sequence() {
-        return ++studentIndex;
-    }
-
     public static int getStudentId() {
-        return sequence();
+        return ++studentIndex;
     }
 
     // 추가 기능
@@ -90,7 +85,7 @@ public class DataRegistry {
     }
 
     // 수강생 상태로 원하는 수강생 리스트 찾기
-    public static List<Student> searchStudentList(StateType stateType) throws InputMismatchException{
+    public static List<Student> searchStudents(StateType stateType) throws InputMismatchException{
         List<Student> studentList = students.stream()
                 .filter(o -> o.getStateType() == stateType).toList();
         // 해당하는 데이터가 없을 경우 예외처리
@@ -126,6 +121,21 @@ public class DataRegistry {
             throw new InputMismatchException("일치하는 과목이 없습니다.");
         }
     }
+
+    // 필수 과목 찾기
+    public static List<Subject> searchSubjects(SubjectType subjectType) throws InputMismatchException {
+        List<Subject> subjectMatchedType = new ArrayList<>();
+        for(Subject subject : subjects) {
+            if(subject.getSubjectType() == subjectType) {
+                subjectMatchedType.add(subject);
+            }
+        }
+        if(!subjectMatchedType.isEmpty()) {
+            return subjectMatchedType;
+        } else {
+            throw new InputMismatchException("일치하는 과목이 없습니다.");
+        }
+    }
     
     // 수강생Id, 과목Id, 회차로 원하는 점수 찾기
     public static Score searchScore(int studentId, int subjectId, int turn) throws InputMismatchException {
@@ -138,36 +148,6 @@ public class DataRegistry {
             return scoreObj.get();
         } else {
             throw new InputMismatchException("일치하는 데이터가 없습니다.");
-        }
-    }
-
-    // 수강생 상태를 입력받아 같은 상태의 수강생들을 찾기
-    public static List<Student> searchStudent(StateType status) throws InputMismatchException {
-        List<Student> statusMatchedStudents = new ArrayList<>();
-        for(Student student : students) {
-            if(student.getStateType() == status) {
-                statusMatchedStudents.add(student);
-            }
-        }
-        if(!statusMatchedStudents.isEmpty()) {
-            return statusMatchedStudents;
-        } else {
-            throw new InputMismatchException("일치하는 학생이 없습니다.");
-        }
-    }
-
-    // 필수 과목 찾기
-    public static List<Subject> searchSubject(SubjectType subjectType) throws InputMismatchException {
-        List<Subject> subjectMatchedType = new ArrayList<>();
-        for(Subject subject : subjects) {
-            if(subject.getSubjectType() == subjectType) {
-                subjectMatchedType.add(subject);
-            }
-        }
-        if(!subjectMatchedType.isEmpty()) {
-            return subjectMatchedType;
-        } else {
-            throw new InputMismatchException("일치하는 과목이 없습니다.");
         }
     }
 

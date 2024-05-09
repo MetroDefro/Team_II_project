@@ -157,7 +157,7 @@ public class StudentManager extends Manager{
     public static void searchStudentByState() {
         do {
             try {
-                List<Student> studentList = DataRegistry.searchStudentList(UserInputReader.getStudentState());
+                List<Student> studentList = DataRegistry.searchStudents(UserInputReader.getStudentState());
                 for (Student student : studentList) {
                     System.out.println("\n학생 ID: " + student.getStudentId());
                     System.out.println("학생 이름: " + student.getStudentName());
@@ -228,7 +228,7 @@ public class StudentManager extends Manager{
 
         Subject subject = DataRegistry.searchSubject(subjectId);
         studentSubjects.add(subject);
-        System.out.println(studentSubjects.size() + "번째 필수 과목 선택됨 = " + subject.getSubjectName());
+        System.out.println(studentSubjects.size() + "번째 필수 과목 선택됨 = " + subject.getSubjectName().getName());
 
         return false;
     }
@@ -257,7 +257,7 @@ public class StudentManager extends Manager{
 
         Subject subject = DataRegistry.searchSubject(subjectId + SUBSUBJECTTUNING);
         studentSubjects.add(subject);
-        System.out.println(studentSubjects.size() + "번째 선택 과목 선택됨 = " + subject.getSubjectName());
+        System.out.println(studentSubjects.size() + "번째 선택 과목 선택됨 = " + subject.getSubjectName().getName());
 
         return false;
     }
