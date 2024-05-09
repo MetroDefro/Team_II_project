@@ -2,43 +2,26 @@ package model;
 
 import enumtype.*;
 
-import java.util.List;
-
 public class Score {
-    private List<Score> scores;
-    private int scoreId;
-    private int studentId;
-    private int subjectId;
+    private final int studentId;
+    private final int subjectId;
     private int scoreTurn;
     private int score;
     private char scoreGrade;
     private int totalScore;
 
-    public Score(int scoreId, int studentId, int subjectId, int scoreTurn, int score, char scoreGrade) {
-        this.scoreId = scoreId;
-        this.studentId = studentId;
-        this.subjectId = subjectId;
-        this.scoreTurn = scoreTurn;
-        this.score = score;
-        this.scoreGrade = scoreGrade;
-    }
-
-    public Score(int studentId, int subjectId, int totalScore, SubjectType subjectType) {
+    public Score(int studentId, int subjectId, int totalScore) {
         this.studentId = studentId;
         this.subjectId = subjectId;
         this.totalScore = totalScore;
     }
 
-    public Score(int studentId, int subjectId, int scoreTurn, int score, char scoreGrade, SubjectType subjectType) {
+    public Score(int studentId, int subjectId, int scoreTurn, int score, char scoreGrade) {
         this.studentId = studentId;
         this.subjectId = subjectId;
         this.scoreTurn = scoreTurn;
         this.score = score;
         this.scoreGrade = scoreGrade;
-    }
-
-    public int getScoreId() {
-        return scoreId;
     }
 
     public int getStudentId() {

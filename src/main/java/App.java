@@ -1,5 +1,5 @@
 import manager.MainManager;
-import util.DataRegistry;
+import data.DataRegistry;
 
 public class App {
     public static void main(String[] args) {

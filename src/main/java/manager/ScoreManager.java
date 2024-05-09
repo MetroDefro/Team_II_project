@@ -1,5 +1,6 @@
 package manager;
 
+import data.*;
 import enumtype.*;
 import model.*;
 import util.*;
@@ -62,7 +63,7 @@ public class ScoreManager extends Manager {
             }
         }
         // 총 점수
-        DataRegistry.addScore(studentIdInput.getStudentId(),subjectInput.getSubjectId(),totalScore, subjectInput.getSubjectType());
+        DataRegistry.addScore(studentIdInput.getStudentId(),subjectInput.getSubjectId(),totalScore);
     }
 
     // 수강생의 과목별 회차 점수 수정
@@ -122,11 +123,11 @@ public class ScoreManager extends Manager {
         StateType inputStudentStatus = UserInputReader.getStudentState();
 
         // 1-1. 상태에 따른 학생들을 먼저 조회한 뒤 해당 학생들의 과목에서 추려야 함
-        for (Student studentInput : DataRegistry.searchStudent(inputStudentStatus)) {
+        for (Student studentInput : DataRegistry.searchStudents(inputStudentStatus)) {
             boolean hasScore = false; // 해당 학생의 성적이 있는지 여부를 체크하는 변수
             for (Subject subject : studentInput.getStudentSubjects()) {
                 try {
-                    if (DataRegistry.searchSubject(SubjectType.ESSENTIAL).contains(subject)) {
+                    if (DataRegistry.searchSubjects(SubjectType.ESSENTIAL).contains(subject)) {
                         Score score = DataRegistry.searchTotalScore(studentInput.getStudentId(), subject.getSubjectId());
                         // 2. 각 과목을 통해 평균 조회
                         int avgScore = score.getTotalScore() / 10;

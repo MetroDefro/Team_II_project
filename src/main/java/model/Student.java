@@ -5,9 +5,9 @@ import enumtype.*;
 import java.util.*;
 
 public class Student {
-    private  int  studentId ;
+    private final int  studentId ;
     private String  studentName ;
-    private List<Subject> studentSubjects;
+    private final List<Subject> studentSubjects;
     StateType stateType;
 
     public Student(int studentId, String studentName, List<Subject> studentSubjects , StateType stateType) {
@@ -16,7 +16,6 @@ public class Student {
         this.studentSubjects = studentSubjects;
         this.stateType = stateType;
     }
-
 
     public int getStudentId() {
         return studentId;
@@ -36,9 +35,8 @@ public class Student {
         this.stateType = instateType;
     }
 
-    public String setStudentName(String studentName) {
+    public void setStudentName(String studentName) {
         this.studentName = studentName;
-        return studentName;
     }
 
 
