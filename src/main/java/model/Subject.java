@@ -3,9 +3,9 @@ package model;
 import enumtype.*;
 
 public class Subject {
-    private int subjectId;
-    private SubjectName subjectName;
-    private SubjectType subjectType;
+    private final int subjectId;
+    private final SubjectName subjectName;
+    private final SubjectType subjectType;
 
     public Subject(SubjectName subjectName) {
         this.subjectId = subjectName.getId();

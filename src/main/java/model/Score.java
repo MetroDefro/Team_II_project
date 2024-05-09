@@ -5,8 +5,8 @@ import enumtype.*;
 import java.util.List;
 
 public class Score {
-    private int studentId;
-    private int subjectId;
+    private final int studentId;
+    private final int subjectId;
     private int scoreTurn;
     private int score;
     private char scoreGrade;

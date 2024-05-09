@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class UserInputReader {
     // 스캐너
-    private static Scanner sc = new Scanner(System.in);
+    private static final Scanner sc = new Scanner(System.in);
 
     public static int getOption(int optionCount) {
         while (true) {
